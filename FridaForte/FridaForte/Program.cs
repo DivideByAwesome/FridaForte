@@ -12,8 +12,7 @@ namespace FridaForte
         static void Main(string[] args)
         {
 
-            ReadKey(); // This command pauses the console so user has time to read it
-                       // and dev has time to see results.
+            ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         }
     }
 }
