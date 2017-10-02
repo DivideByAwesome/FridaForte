@@ -8,9 +8,10 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void TestProgramReadKey()
+        public void TestProgramTestConnected()
         {
-            Assert.AreEqual(ReadKey(), null);
+            // This blank test assures that test project is connected.
+            // Assert.AreEqual(true, false);
         }
     }
 }
