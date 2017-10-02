@@ -18,8 +18,20 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestLocationClassInstantition()
         {
-            Location testLocation = new Location();
-            Assert.IsInstanceOfType(testLocation, typeof (Location));
+            Location pharmacy = new Location(
+                "Pharmacy", 
+                "Leaving the pharmacy....",
+                "Open the door!",
+                new string[] {"Open", "Close" });
+
+            Assert.IsInstanceOfType(pharmacy, typeof (Location));
+            Assert.AreEqual("Pharmacy", pharmacy.Name);
+            Assert.AreEqual("Leaving the pharmacy....", pharmacy.Message);
+            Assert.AreEqual("Open the door!", pharmacy.Hint);
+            Assert.AreEqual("Open", pharmacy.Choices[0]);
+            Assert.AreEqual("Close", pharmacy.Choices[1]);
         }
+
+        
     }
 }
