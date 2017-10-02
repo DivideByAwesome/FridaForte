@@ -40,5 +40,22 @@ namespace UnitTestProject1
             Assert.AreEqual("player1", player.Name);
             Assert.AreEqual("Current input", player.CurrentInput);
         }
+
+        [TestMethod]
+        public void TestValidatorInstantiation()
+        {
+            string actual1 = Validator.ValidateString("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy");
+            string actual2 = Validator.ValidateString("a");
+            string actual3 = Validator.ValidateString("aa");
+
+            string expected1 = "I don't understand that command.";
+            string expected2 = string.Empty;
+
+            Assert.IsInstanceOfType(actual1, typeof(string));
+            Assert.AreEqual(expected1, actual1);
+            //Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(string.Empty, actual3);
+
+        }
     }
 }
