@@ -13,13 +13,6 @@ namespace FridaForte
         public string Message { get; }
         public string Hint { get; }
         public string[] Choices;
-        public void showChoices()
-        {
-            foreach (string choice in Choices)
-            {
-                WriteLine(choice);
-            }
-        }
 
         public Location(string name, string message, string hint, string[] choices)
         {
@@ -29,5 +22,12 @@ namespace FridaForte
             Choices = choices;
         }
 
+        public void showChoices()
+        {
+            foreach (string choice in Choices)
+            {
+                WriteLine(choice);
+            }
+        }
     }
 }

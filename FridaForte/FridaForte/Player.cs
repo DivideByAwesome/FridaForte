@@ -8,15 +8,17 @@ namespace FridaForte
 {
     public class Player
     {
-        public string Name { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
         public string CurrentInput { get; }
 
-        public Player(string currentInput)
+        public Player()
         {
-            Name = "Frida Forte";
-            CurrentInput = currentInput;
+            FirstName = "Frida";
+            LastName = "Forte";
         }
 
 
+            //CurrentInput = currentInput;
     }
 }
