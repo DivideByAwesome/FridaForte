@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace FridaForte
 {
@@ -19,6 +20,29 @@ namespace FridaForte
             Message = message;
             Hint = hint;
             Choices = choices;
+        }
+
+        public string showName()
+        {
+           return Name;
+        }
+
+        public string showMessage()
+        {
+            return Message;
+        }
+
+        public string showHint()
+        {
+            return Hint;
+        }
+
+        public void showChoices()
+        {
+            foreach(string choice in Choices)
+            {
+                WriteLine(choice);
+            }
         }
     }
 }

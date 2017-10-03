@@ -13,8 +13,10 @@ namespace FridaForte
 
         public Player(string currentInput)
         {
-            Name = "Frida";
+            Name = "Frida Forte";
             CurrentInput = currentInput;
         }
+
+
     }
 }
