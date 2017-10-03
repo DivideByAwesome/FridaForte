@@ -35,10 +35,11 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestPlayerInstantiation()
         {
-            Player player = new Player("Current input");
+            Player player = new Player();
             Assert.IsInstanceOfType(player, typeof(Player));
-            Assert.AreEqual("Frida", player.Name);
-            Assert.AreEqual("Current input", player.CurrentInput);
+            Assert.AreEqual("Frida", player.FirstName);
+            Assert.AreEqual("Forte", player.LastName);
+            //Assert.AreEqual("Current input", player.CurrentInput);
         }
 
         [TestMethod]
