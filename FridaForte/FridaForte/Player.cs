@@ -11,9 +11,9 @@ namespace FridaForte
         public string Name { get; }
         public string CurrentInput { get; }
 
-        public Player(string name, string currentInput)
+        public Player(string currentInput)
         {
-            Name = name;
+            Name = "Frida";
             CurrentInput = currentInput;
         }
     }

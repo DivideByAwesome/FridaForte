@@ -35,14 +35,14 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestPlayerInstantiation()
         {
-            Player player = new Player("player1", "Current input");
+            Player player = new Player("Current input");
             Assert.IsInstanceOfType(player, typeof(Player));
-            Assert.AreEqual("player1", player.Name);
+            Assert.AreEqual("Frida", player.Name);
             Assert.AreEqual("Current input", player.CurrentInput);
         }
 
         [TestMethod]
-        public void TestValidatorInstantiation()
+        public void TestValidatorReturnValue()
         {
             string actual1 = Validator.ValidateString("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy");
             string actual2 = Validator.ValidateString("a");
@@ -53,9 +53,8 @@ namespace UnitTestProject1
 
             Assert.IsInstanceOfType(actual1, typeof(string));
             Assert.AreEqual(expected1, actual1);
-            //Assert.AreEqual(expected2, actual2);
-            Assert.AreEqual(string.Empty, actual3);
-
+            Assert.AreEqual(expected1, actual2);
+            Assert.AreEqual(expected2, actual3);
         }
     }
 }
