@@ -14,7 +14,7 @@ namespace FridaForte
             {
                 return "I don't understand that command.";
             }
-            return string.Empty;
+            return input;
         }
     }
 }

@@ -30,6 +30,10 @@ namespace UnitTestProject1
             Assert.AreEqual("Open the door!", pharmacy.Hint);
             Assert.AreEqual("Open", pharmacy.Choices[0]);
             Assert.AreEqual("Close", pharmacy.Choices[1]);
+            // Make sure method doesn't change array
+            pharmacy.ShowChoices();
+            Assert.AreEqual("Open", pharmacy.Choices[0]);
+            Assert.AreEqual("Close", pharmacy.Choices[1]);
         }
 
         [TestMethod]
@@ -50,12 +54,20 @@ namespace UnitTestProject1
             string actual3 = Validator.ValidateString("aa");
 
             string expected1 = "I don't understand that command.";
-            string expected2 = string.Empty;
+            string expected2 = "aa";
 
             Assert.IsInstanceOfType(actual1, typeof(string));
             Assert.AreEqual(expected1, actual1);
             Assert.AreEqual(expected1, actual2);
             Assert.AreEqual(expected2, actual3);
+        }
+
+        [TestMethod]
+        public void TestProgramValidateString()
+        {
+            string actual = Validator.ValidateString("abc");
+            Assert.IsInstanceOfType(Validator.ValidateString("abc"), typeof(string));
+            Assert.AreEqual("abc", actual);
         }
     }
 }
