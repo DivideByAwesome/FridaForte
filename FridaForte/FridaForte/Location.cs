@@ -12,7 +12,7 @@ namespace FridaForte
         public string Message { get; }
         public string Hint { get; }
         public string[] Choices { get; }
-
+    
         public Location(string name, string message, string hint, string[] choices)
         {
             Name = name;
