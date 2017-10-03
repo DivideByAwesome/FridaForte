@@ -2,6 +2,8 @@
 using FridaForte;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static System.Console;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace UnitTestProject1
 {
@@ -68,6 +70,20 @@ namespace UnitTestProject1
             string actual = Validator.ValidateString("abc");
             Assert.IsInstanceOfType(Validator.ValidateString("abc"), typeof(string));
             Assert.AreEqual("abc", actual);
+        }
+
+        [TestMethod]
+        public void TestProgramGetContent()
+        {
+            string actual = Directory.GetCurrentDirectory();
+            Assert.IsNotNull(actual);
+
+            actual += "../../../../FridaForte/GameContent.json";
+            Assert.IsNotNull(actual);
+
+            Location[] actuals = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(actual));
+            Assert.IsNotNull(actuals);
+            Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
     }
 }
