@@ -22,7 +22,7 @@ namespace FridaForte
             Choices = choices;
         }
 
-        public void showChoices()
+        public void ShowChoices()
         {
             foreach (string choice in Choices)
             {
