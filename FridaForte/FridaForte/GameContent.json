@@ -1,0 +1,56 @@
+﻿[
+    {
+        "location": "Pharmacy",
+        "content": "Welcome Player!\nYou are taking the role of Frida Forte Pharmacist Extraordinaire!  Frida has had a modest and quiet life so far, but all of that is about to change.\nToday, Frida gets a letter from her cousin who lives in Fort Point, California.\nLetter:\n\nDearest Cousin Frida,\n\nIt is with great sadness I inform you that I have a fallen ill with dysentery. Our little town of Fort Point does not have a doctor and I am running out of time. I would not ask this of you, but I am in great distress. As you are the only pharmacist I know, I see no better person to help me in my time of need. Would you please come as soon as possible?\n\nYour loving cousin,\nAsher Sweep",
+        "choices": [ "Stay and run shop", "Go help your cousin" ],
+        "choiceOneText": null,
+        "choiceTwoText": null,
+        "danger": "You decided to ignore your cousin's request, and stay to run your pharmacy. Unfortunately, after a couple weeks you get another letter informing you that your cousin has passed away.  Game Over.",
+        "correctChoice": "You have chosen to help your cousin. You quickly close up shop and head home to pack for the trip to Fort Point."
+    },
+    {
+        "location": "Home",
+        "content": "You are packed and ready to go. You now have to decide on transportation.",
+        "choices": [ "Ride horse", "Take train" ],
+        "choiceOneText": null,
+        "choiceTwoText": null,
+        "danger": "Good thinking! You decide taking your equipment is important. However, time is valuable. Unfortunately, the ride is too long and your cousin has taken a turn for the worse. Asher has passed away.",
+        "correctChoice": "You have just enough money to buy a train ticket and can't afford to pay to ship your equipment. This means you have to gather supplies once you arrive in Fort Point. It will take 2 days for you to arrive in Fort Point."
+    },
+    {
+        "location": "Fort Point",
+        "content": "Two days have passed. You have arrived at Fort Point.  Since you don't have any supplies or equipment, you need to go foraging to gather the medicinal herbs needed to help Asher.  You speak to the locals to figure out the lay of the land. After several interviews, you deduce that there are two good foraging spots near town:",
+        "choices": [ "Go to the Forest", "Go to the Meadow" ],
+        "choiceOneText": "The Meadow – Many medicinal fruits and herbs can be harvested here.",
+        "choiceTwoText": "The Forest – An array (get it?!?) of medicinal splendor in the form of wondrous fungi and barks.",
+        "danger": "You know that old saying, \"If a tree falls in the forest,make a sound?\" This tree did; you are dead.",
+        "correctChoice": "It takes you an hour to walk to the meadows. You arrive in the mid-afternoon."
+    },
+    {
+        "location": "Meadows",
+        "content": "You must decide what plant to pick in order to make medicine to cure your cousin. You must make your decision quickly because you are running out of daylight.\n\nAvailable in the meadows (forest?) are pine needles and Echinacea.",
+        "choices": [ "Gather Echinacea", "Go to the Meadow" ],
+        "choiceOneText": null,
+        "choiceTwoText": null,
+        "danger": "As you reach down to pick the flower you are bitten by a venomous snake. The poison is quick. You die in minutes. Game Over.",
+        "correctChoice": "You picked a hand full of pine needles and put them in your satchel. You see that it's starting to get dark, so to head to Asher's house.\n\nYou walk to the end of the meadow, and you stumble upon a road heading to town."
+    },
+    {
+        "location": "Fort Point Jailhouse",
+        "content": "\"Get on in there, lady!\" The deputy shouts as he slams the cell door.  \"The sheriff'll be back by in the mornin' to deal with ya.\" \"But, I'm innocent!\", you proclaim. \"Shut up and let me sleep!\" The dopey deputy takes a long stretch then sits back in his chair, puts his hat over his head and falls asleep. As the deputy sleeps, you weigh your options.",
+        "choices": [ "Wait for morning", "Pick lock" ],
+        "choiceOneText": "You can wait until the morning to explain your story to the sheriff.",
+        "choiceTwoText": "Use your hair pin to pick the lock, and escape the jail cell.",
+        "danger": "You choose to take the legal route and plead your case in the  morning, unfortunately, the sheriff doesn't believe you and forces you to stay a month in jail awaiting a trial, and in doing so, seals your cousins fate. Game Over.",
+        "correctChoice": "You choose to break the law (for real this time) and break out of jail. You grab your satchel from the sleeping deputy's desk and race to Asher's house."
+    },
+    {
+        "location": "Asher's House",
+        "content": "You arrive at Asher's house. \"Dear Asher!\" you exclaim upon seeing the frail figure in bed. Time is running out for Asher. Decide quickly how to prepare his medicine!",
+        "choices": [ "Crush needles ", "Make tea" ],
+        "choiceOneText": "You can crush the pine needles to a powder and apply directly to Asher's chest",
+        "choiceTwoText": "You can boil the pine needles and make a tea for Asher to drink.",
+        "danger": "After waiting for a day, you realize that the powder is not effective. Asher suddenly develops a skin rash and the other symptoms worsen. Sadly, Asher dies. You have failed to save your cousin. Game Over.",
+        "correctChoice": "You continue to monitor Asher for the next few days on this treatment. After a month he has fully recovered! The locals have heard of your pharmaceutical genius and they beg you to stay as the town doctor.\n\nCongratulations! You've won!!"
+    }
+] 
