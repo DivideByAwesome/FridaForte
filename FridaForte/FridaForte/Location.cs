@@ -24,9 +24,13 @@ namespace FridaForte
 
         public void ShowChoices()
         {
-            foreach (string choice in Choices)
+            WriteLine("\nWhat do you want to do?\n");
+
+            WriteLine(Choices[0]);
+            for (int i = 1; i < Choices.Length; i++)
             {
-                WriteLine(choice);
+                WriteLine("or");
+                WriteLine(Choices[i]);
             }
         }
     }
