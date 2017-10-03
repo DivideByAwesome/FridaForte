@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,7 @@ namespace FridaForte
             string[] choices = { "stay and run shop", "go help your cousin" };
             Location pharmacy = new Location("Pharmacy", $"Today {player.FirstName} gets a letter from her cousin who lives in Fort Point, California.\n\n\nLetter:\n\nDearest Cousin {player.FirstName},\n\n\nIt is with great sadness that I inform you that I have fallen ill with dysentery. Our little town of Fort Point does not have a doctor and I am running out of time. I would normally not ask this of you but I am in great distress. As you are the only pharmacist I know, I see no better person to help me in my time of need. Would you please come as soon as possible?\n\n\nYour loving cousin,\n\nAsher", "no hint for this scene", choices);
 
+            TestContentJSON();
             WelcomePlayer(player);                    
             Typer(pharmacy.Name);
             Typer(WordWrapper(pharmacy.Message));
@@ -23,6 +26,24 @@ namespace FridaForte
             input = GetInput("\nEnter your decision: ");
             
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
+        } // End Main()
+
+        public static void TestContentJSON()
+        {
+            string path = Directory.GetCurrentDirectory();
+
+            string jsonFile = path + "../../../GameContent.json";
+            Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
+            for (int i = 0; i < locations.Length; i++)
+            {
+                WriteLine(locations[i].Name);
+                WriteLine(locations[i].Message);
+                WriteLine("\n\n***********");
+                WriteLine("Choices");
+                WriteLine("***********");
+                WriteLine(locations[i].Choices[0]);
+                WriteLine(locations[i].Choices[1]);
+            }
         }
 
         private static void WelcomePlayer(Player player)
