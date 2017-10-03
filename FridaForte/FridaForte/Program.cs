@@ -15,20 +15,20 @@ namespace FridaForte
         {
             string input = string.Empty;
             Player player = new Player();
-            string[] choices = { "stay and run shop", "go help your cousin" };
-            Location pharmacy = new Location("Pharmacy", $"Today {player.FirstName} gets a letter from her cousin who lives in Fort Point, California.\n\n\nLetter:\n\nDearest Cousin {player.FirstName},\n\n\nIt is with great sadness that I inform you that I have fallen ill with dysentery. Our little town of Fort Point does not have a doctor and I am running out of time. I would normally not ask this of you but I am in great distress. As you are the only pharmacist I know, I see no better person to help me in my time of need. Would you please come as soon as possible?\n\n\nYour loving cousin,\n\nAsher", "no hint for this scene", choices);
+            //string[] choices = { "stay and run shop", "go help your cousin" };
+            //Location pharmacy = new Location("Pharmacy", $"Today {player.FirstName} gets a letter from her cousin who lives in Fort Point, California.\n\n\nLetter:\n\nDearest Cousin {player.FirstName},\n\n\nIt is with great sadness that I inform you that I have fallen ill with dysentery. Our little town of Fort Point does not have a doctor and I am running out of time. I would normally not ask this of you but I am in great distress. As you are the only pharmacist I know, I see no better person to help me in my time of need. Would you please come as soon as possible?\n\n\nYour loving cousin,\n\nAsher", "no hint for this scene", choices);
 
-            TestContentJSON();
+            Location[] locations = GetContent();
             WelcomePlayer(player);                    
-            Typer(pharmacy.Name);
-            Typer(WordWrapper(pharmacy.Message));
-            pharmacy.ShowChoices();
+            Typer(locations[0].Name);
+            Typer(WordWrapper(locations[0].Message));
+            locations[0].ShowChoices();
             input = GetInput("\nEnter your decision: ");
             
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         } // End Main()
 
-        public static void TestContentJSON()
+        public static Location[] GetContent()
         {
             string path = Directory.GetCurrentDirectory();
 
@@ -44,6 +44,8 @@ namespace FridaForte
                 WriteLine(locations[i].Choices[0]);
                 WriteLine(locations[i].Choices[1]);
             }
+
+            return locations;
         }
 
         private static void WelcomePlayer(Player player)
