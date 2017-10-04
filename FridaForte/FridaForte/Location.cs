@@ -24,7 +24,7 @@ namespace FridaForte
             RightChoice = rightChoice;
         }
 
-        public void ShowChoices()
+        public void ShowWrongChoices()
         {
             WriteLine("\nWhat do you want to do?\n");
 
