@@ -12,25 +12,25 @@ namespace FridaForte
         public string Name { get; }
         public string Message { get; }
         public string Hint { get; }
-        public string[] choices;
+        public string[] Choices;
 
         public Location(string name, string message, string hint, string[] choices)
         {
             Name = name;
             Message = message;
             Hint = hint;
-            this.choices = choices;
+            Choices = choices;
         }
 
         public void ShowChoices()
         {
             WriteLine("\nWhat do you want to do?\n");
 
-            WriteLine(choices[0]);
-            for (int i = 1; i < choices.Length; i++)
+            WriteLine(Choices[0]);
+            for (int i = 1; i < Choices.Length; i++)
             {
                 WriteLine("or");
-                WriteLine(choices[i]);
+                WriteLine(Choices[i]);
             }
         }
     }

@@ -30,12 +30,12 @@ namespace UnitTestProject1
             Assert.AreEqual("Pharmacy", pharmacy.Name);
             Assert.AreEqual("Leaving the pharmacy....", pharmacy.Message);
             Assert.AreEqual("Open the door!", pharmacy.Hint);
-            Assert.AreEqual("Open", pharmacy.choices[0]);
-            Assert.AreEqual("Close", pharmacy.choices[1]);
+            Assert.AreEqual("Open", pharmacy.Choices[0]);
+            Assert.AreEqual("Close", pharmacy.Choices[1]);
             // Make sure method doesn't change array
             pharmacy.ShowChoices();
-            Assert.AreEqual("Open", pharmacy.choices[0]);
-            Assert.AreEqual("Close", pharmacy.choices[1]);
+            Assert.AreEqual("Open", pharmacy.Choices[0]);
+            Assert.AreEqual("Close", pharmacy.Choices[1]);
         }
 
         [TestMethod]

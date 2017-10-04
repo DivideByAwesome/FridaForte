@@ -39,8 +39,8 @@ namespace FridaForte
                 WriteLine("\n\n***********");
                 WriteLine("Choices");
                 WriteLine("***********");
-                WriteLine(locations[i].choices[0]);
-                WriteLine(locations[i].choices[1]);
+                WriteLine(locations[i].Choices[0]);
+                WriteLine(locations[i].Choices[1]);
             }
 
             return locations;
