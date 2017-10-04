@@ -63,5 +63,6 @@ namespace UnitTestProject1
             Assert.IsNotNull(actuals);
             Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
+
     } // End class UnitTest1
 }
