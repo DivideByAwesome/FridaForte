@@ -24,7 +24,7 @@ namespace UnitTestProject1
                 "Pharmacy", 
                 "Leaving the pharmacy....",
                 "Open the door!",
-                new string[] {"Open", "Close" });
+                new string[] {"Open", "Close" }, "correct", "dead");
 
             Assert.IsInstanceOfType(pharmacy, typeof (Location));
             Assert.AreEqual("Pharmacy", pharmacy.Name);
@@ -32,6 +32,8 @@ namespace UnitTestProject1
             Assert.AreEqual("Open the door!", pharmacy.Hint);
             Assert.AreEqual("Open", pharmacy.Choices[0]);
             Assert.AreEqual("Close", pharmacy.Choices[1]);
+            Assert.AreEqual("correct", pharmacy.Correct);
+            Assert.AreEqual("dead", pharmacy.Danger);
             // Make sure method doesn't change array
             pharmacy.ShowChoices();
             Assert.AreEqual("Open", pharmacy.Choices[0]);
