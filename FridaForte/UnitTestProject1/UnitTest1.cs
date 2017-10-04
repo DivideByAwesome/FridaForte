@@ -49,30 +49,6 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void TestValidatorReturnValue()
-        {
-            string actual1 = Validator.ValidateString("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy");
-            string actual2 = Validator.ValidateString("a");
-            string actual3 = Validator.ValidateString("aa");
-
-            string expected1 = "I don't understand that command.";
-            string expected2 = "aa";
-
-            Assert.IsInstanceOfType(actual1, typeof(string));
-            Assert.AreEqual(expected1, actual1);
-            Assert.AreEqual(expected1, actual2);
-            Assert.AreEqual(expected2, actual3);
-        }
-
-        [TestMethod]
-        public void TestProgramValidateString()
-        {
-            string actual = Validator.ValidateString("abc");
-            Assert.IsInstanceOfType(Validator.ValidateString("abc"), typeof(string));
-            Assert.AreEqual("abc", actual);
-        }
-
-        [TestMethod]
         public void TestProgramGetContent()
         {
             string actual = Directory.GetCurrentDirectory();
@@ -85,5 +61,5 @@ namespace UnitTestProject1
             Assert.IsNotNull(actuals);
             Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
-    }
+    } // End class UnitTest1
 }
