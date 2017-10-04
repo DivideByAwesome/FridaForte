@@ -35,6 +35,11 @@ namespace FridaForte
                     {
                         Typer(locations[i].CorrectChoice);
                     }
+                    else // user inputs neither danger choice nor correct choice
+                    {
+                        WriteLine($"\nYou entered: {input}");
+                        WriteLine("I don't understand that command.\nPlease try again.");
+                    }
                 } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower())));
             }
 
