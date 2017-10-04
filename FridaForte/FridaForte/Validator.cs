@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace FridaForte
 {
     public static class Validator
     {
-        public static string ValidateString(string input)
+        public static string ValidateString(string prompt)
         {
-            if(input.Length > 50 || input.Length < 2)
+            string input = string.Empty;
+
+            do
             {
-                return "I don't understand that command.";
-            }
+                Write(prompt);
+                input = ReadLine().Trim();
+            } while (input.Length < 2 || input.Length > 50);
+
             return input;
         }
     }

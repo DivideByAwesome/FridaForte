@@ -2,6 +2,8 @@
 using FridaForte;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static System.Console;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace UnitTestProject1
 {
@@ -47,27 +49,17 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void TestValidatorReturnValue()
+        public void TestProgramGetContent()
         {
-            string actual1 = Validator.ValidateString("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy");
-            string actual2 = Validator.ValidateString("a");
-            string actual3 = Validator.ValidateString("aa");
+            string actual = Directory.GetCurrentDirectory();
+            Assert.IsNotNull(actual);
 
-            string expected1 = "I don't understand that command.";
-            string expected2 = "aa";
+            actual += "../../../../FridaForte/GameContent.json";
+            Assert.IsNotNull(actual);
 
-            Assert.IsInstanceOfType(actual1, typeof(string));
-            Assert.AreEqual(expected1, actual1);
-            Assert.AreEqual(expected1, actual2);
-            Assert.AreEqual(expected2, actual3);
+            Location[] actuals = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(actual));
+            Assert.IsNotNull(actuals);
+            Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
-
-        [TestMethod]
-        public void TestProgramValidateString()
-        {
-            string actual = Validator.ValidateString("abc");
-            Assert.IsInstanceOfType(Validator.ValidateString("abc"), typeof(string));
-            Assert.AreEqual("abc", actual);
-        }
-    }
+    } // End class UnitTest1
 }
