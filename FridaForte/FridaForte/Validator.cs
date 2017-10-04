@@ -16,7 +16,19 @@ namespace FridaForte
             do
             {
                 Write(prompt);
-                input = ReadLine().Trim();
+
+                try
+                {
+                    input = ReadLine().Trim();
+                }
+                catch (NullReferenceException)
+                {
+                    input = string.Empty;
+                }
+                catch (Exception)
+                {
+                    input = string.Empty;
+                }
             } while (input.Length < 2 || input.Length > 50);
 
             return input;
