@@ -32,6 +32,8 @@ namespace FridaForte
 
             string jsonFile = path + "../../../GameContent.json";
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
+
+            // need to change this loop to a switch or if/else statement
             for (int i = 0; i < locations.Length; i++)
             {
                 WriteLine(locations[i].Name);
@@ -48,9 +50,9 @@ namespace FridaForte
 
         private static void WelcomePlayer(Player player)
         {
-            WriteLine($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
-            WriteLine("Welcome Player!");
-            WriteLine($"You are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
+            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
+            Typer("Welcome Player!");
+            Typer($"You are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
         }
 
         public static string GetInput(string prompt)
@@ -65,15 +67,15 @@ namespace FridaForte
                 return string.Empty;
             }
 
-            var approxLineCount = paragraph.Length / Console.WindowWidth;
-            var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+            int approxLineCount = paragraph.Length / WindowWidth;
+            StringBuilder lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
 
-            for (var i = 0; i < paragraph.Length;)
+            for (int i = 0; i < paragraph.Length;)
             {
-                var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-                var line = paragraph.Substring(i, grabLimit);
+                int grabLimit = Math.Min(WindowWidth, paragraph.Length - i);
+                string line = paragraph.Substring(i, grabLimit);
 
-                var isLastChunk = grabLimit + i == paragraph.Length;
+                bool isLastChunk = grabLimit + i == paragraph.Length;
 
                 if (isLastChunk)
                 {
@@ -82,7 +84,7 @@ namespace FridaForte
                 }
                 else
                 {
-                    var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+                    int lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
                     lines.AppendLine(line.Substring(0, lastSpace));
 
                     //Trailing spaces needn't be displayed as the first character on the new line
