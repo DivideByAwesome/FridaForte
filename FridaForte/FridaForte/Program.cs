@@ -115,7 +115,7 @@ namespace FridaForte
             for (int i = 0; i < str.Length; i++)
             {
                 Write(str[i]);
-                System.Threading.Thread.Sleep(6);
+                System.Threading.Thread.Sleep(3);
             }
             WriteLine();
         }
