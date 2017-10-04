@@ -14,17 +14,16 @@ namespace FridaForte
         public string Hint { get; }
         public string[] Choices;
         public string Danger { get; }
-        public string Correct { get; }
+        public string CorrectChoice { get; }
 
-        public Location(string name, string message, string hint, string[] choices, string correct, string danger)
+        public Location(string name, string message, string hint, string[] choices, string correctChoice, string danger)
         {
             Name = name;
             Message = message;
             Hint = hint;
             Choices = choices;
             Danger = danger;
-            Correct = correct;
-
+            CorrectChoice = correctChoice;
         }
 
         public void ShowChoices()
