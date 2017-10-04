@@ -15,14 +15,18 @@ namespace FridaForte
         {
             string input = string.Empty;
             Player player = new Player();
-            
             Location[] locations = GetContent();
-            WelcomePlayer(player);                    
-            Typer(locations[0].Name);
-            Typer(WordWrapper(locations[0].Message));
-            locations[0].ShowChoices();
-            input = GetInput("\nEnter your decision: ");
-            
+            WelcomePlayer(player);
+
+            foreach (Location location in locations)
+            {
+                Typer(location.Name);
+                Typer(WordWrapper(location.Message));
+                location.ShowChoices();
+                input = GetInput("\nEnter your decision: ");
+            }
+
+
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         } // End Main()
 
@@ -34,16 +38,16 @@ namespace FridaForte
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
 
             // need to change this loop to a switch or if/else statement
-            for (int i = 0; i < locations.Length; i++)
-            {
-                WriteLine(locations[i].Name);
-                WriteLine(locations[i].Message);
-                WriteLine("\n\n***********");
-                WriteLine("Choices");
-                WriteLine("***********");
-                WriteLine(locations[i].Choices[0]);
-                WriteLine(locations[i].Choices[1]);
-            }
+            //for (int i = 0; i < locations.Length; i++)
+            //{
+            //    WriteLine(locations[i].Name);
+            //    WriteLine(locations[i].Message);
+            //    WriteLine("\n\n***********");
+            //    WriteLine("Choices");
+            //    WriteLine("***********");
+            //    WriteLine(locations[i].Choices[0]);
+            //    WriteLine(locations[i].Choices[1]);
+            //}
 
             return locations;
         }
@@ -51,8 +55,8 @@ namespace FridaForte
         private static void WelcomePlayer(Player player)
         {
             Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
-            Typer("Welcome Player!");
-            Typer($"You are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
+            Typer("\nWelcome Player!");
+            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
         }
 
         public static string GetInput(string prompt)
