@@ -19,6 +19,7 @@ namespace FridaForte
             WelcomePlayer(player);
 
             foreach (Location location in locations)
+
             {
                 Typer(location.Name);
                 Typer(WordWrapper(location.Message));

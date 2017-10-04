@@ -21,6 +21,8 @@ namespace FridaForte
             Name = name;
             Message = message;
             Hint = hint;
+
+
             Choices = choices;
             Danger = danger;
             Correct = correct;
