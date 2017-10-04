@@ -1,7 +1,7 @@
 ﻿[
     {
-        "name": "Pharmacy\n\n",
-        "message": "Welcome Player!\n\nYou are taking the role of Frida Forte Pharmacist Extraordinaire! Frida has had a modest and quiet life so far, but all of that is about to change.\nToday, Frida gets a letter from her cousin who lives in Fort Point, California.\n\nLetter:\n\nDearest Cousin Frida,\n\nIt is with great sadness I inform you that I have a fallen ill with dysentery. Our little town of Fort Point does not have a doctor and I am running out of time. I would not ask this of you, but I am in great distress. As you are the only pharmacist I know, I see no better person to help me in my time of need. Would you please come as soon as possible?\n\nYour loving cousin,\nAsher Sweep\n\n",
+        "name": "\n\nPharmacy\n\n",
+        "message": "Today, Frida gets a letter from her cousin who lives in Fort Point, California.\n\nLetter:\n\nDearest Cousin Frida,\n\nWith great sadness, I must inform you that I have a fallen ill with dysentery. Our little town of Fort Point does not have a doctor and I am running out of time. I would not ask this of you, but I am in great distress. As you are the only pharmacist I know, I see no better person to help me in my time of need. Would you please come as soon as possible?\n\nYour loving cousin,\nAsher\n\n",
         "choices": [ "Stay and run shop", "Go help your cousin" ],
         "choiceOneHint": null,
         "choiceTwoHint": null,
