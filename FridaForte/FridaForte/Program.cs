@@ -18,12 +18,24 @@ namespace FridaForte
             Location[] locations = GetContent();
             WelcomePlayer(player);
 
-            foreach (Location location in locations)
+            for (int i = 0; i < locations.Length; ++i)
             {
-                Typer(location.Name);
-                Typer(WordWrapper(location.Message));
-                location.ShowChoices();
-                input = GetInput("\nEnter your decision: ");
+                Typer(locations[i].Name);
+                Typer(WordWrapper(locations[i].Message));
+                do
+                {
+                    locations[i].ShowChoices();
+                    input = GetInput("\nEnter your decision: ");
+                    if (input.Contains(locations[i].Choices[0].ToLower()))
+                    {
+                        Typer(locations[i].Danger);
+                        return;
+                    }
+                    else if (input.Contains(locations[i].Choices[1].ToLower()))
+                    {
+                        Typer(locations[i].CorrectChoice);
+                    }
+                } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower())));
             }
 
 
@@ -61,7 +73,7 @@ namespace FridaForte
 
         public static string GetInput(string prompt)
         {
-            return Validator.ValidateString(prompt);
+            return Validator.ValidateString(prompt).ToLower();
         }
 
         static string WordWrapper(string paragraph)
