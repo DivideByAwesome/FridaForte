@@ -21,17 +21,19 @@ namespace FridaForte
         private static void RunGame()
         {
             Location[] locations = GetContent();
+            Location location;
             bool canContinue = true;
             
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
-                Typer(locations[i].Name);
-                Typer(WordWrapper(locations[i].Message));
-                canContinue = MakeDecision(locations, i, canContinue);
+                location = locations[i];
+                Typer(location.Name);
+                Typer(WordWrapper(location.Message));
+                canContinue = MakeDecision(location, canContinue);
             }
         }
 
-        private static bool MakeDecision(Location[] locations, int i, bool canContinue)
+        private static bool MakeDecision(Location location, bool canContinue)
         {
             string input = string.Empty;
             bool isWrongChoice = false;
@@ -39,19 +41,19 @@ namespace FridaForte
             
             do
             {
-                locations[i].ShowChoices();
+                location.ShowChoices();
                 input = GetInput("\nEnter your decision: ");
-                isWrongChoice = input.Contains(locations[i].Choices[0].ToLower());
-                isCorrectChoice = input.Contains(locations[i].Choices[1].ToLower());
+                isWrongChoice = input.Contains(location.Choices[0].ToLower());
+                isCorrectChoice = input.Contains(location.Choices[1].ToLower());
 
                 if (isWrongChoice)
                 {
-                    Typer(locations[i].Danger);
+                    Typer(location.Danger);
                     canContinue = false;
                 }
                 else if (isCorrectChoice)
                 {
-                    Typer(locations[i].CorrectChoice);
+                    Typer(location.CorrectChoice);
                     canContinue = true;
                 }
                 else // user inputs neither danger choice nor correct choice
