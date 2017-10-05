@@ -38,7 +38,7 @@ namespace FridaForte
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
                 location = locations[i];
-                Typer(location.Name);
+                Typer("Location: " + location.Name);
                 Typer(WordWrapper(location.Message));
                 canContinue = CanContinue(location, canContinue);
             }
@@ -80,7 +80,7 @@ namespace FridaForte
                 }
             } while (!(isWrongChoice || isCorrectChoice));
 
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
             Clear();
 
             return canContinue;
