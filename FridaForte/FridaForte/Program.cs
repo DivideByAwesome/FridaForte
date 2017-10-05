@@ -15,9 +15,19 @@ namespace FridaForte
         static void Main(string[] args)
         {                      
             WelcomePlayer();
-            RunGame();        
+            RunGame();
+            ShowAuthors();
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         } // End Main()
+
+        private static void ShowAuthors()
+        {
+            WriteLine("\nBrought to you by the A-Team:\n");
+            WriteLine("Scrum Master/Team Lead: Sara Jade https://www.linkedin.com/in/sara-jade/");
+            WriteLine("Super Coding Diva: Sugey Valencia https://www.linkedin.com/in/sugey-valencia-955667140/");
+            WriteLine("Rockin' Feature Developer: Roscoe Bass https://www.linkedin.com/in/roscoebass/");
+            WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
+        }
 
         private static void RunGame()
         {
