@@ -29,11 +29,11 @@ namespace FridaForte
                 location = locations[i];
                 Typer(location.Name);
                 Typer(WordWrapper(location.Message));
-                canContinue = MakeDecision(location, canContinue);
+                canContinue = CanContinue(location, canContinue);
             }
         }
 
-        private static bool MakeDecision(Location location, bool canContinue)
+        private static bool CanContinue(Location location, bool canContinue)
         {
             string input = string.Empty;
             bool isWrongChoice = false;
