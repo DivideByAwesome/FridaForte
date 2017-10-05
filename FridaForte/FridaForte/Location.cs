@@ -29,15 +29,32 @@ namespace FridaForte
         }
 
         public void ShowChoices()
-        {           
+        {
             Program.Typer("\nWhat do you want to do?\n");
+            ForegroundColor = ConsoleColor.Gray;
+            BackgroundColor = ConsoleColor.DarkGreen;
             WriteLine(Choices[0]);
-            Write(ChoiceContext[0] + "\n");
+            ResetColor();
+            if (!(ChoiceContext[0] == null))
+            {
+                ForegroundColor = ConsoleColor.DarkGreen;
+                Write(ChoiceContext[0] + "\n");
+            }
+
             for (int i = 1; i < Choices.Length; i++)
             {
+                ResetColor();
                 WriteLine("-or-");
+                ForegroundColor = ConsoleColor.Gray;
+                BackgroundColor = ConsoleColor.DarkGreen;
                 WriteLine(Choices[i]);
-                Write(ChoiceContext[i] + "\n");
+                ResetColor();
+                if (!(ChoiceContext[i] == null))
+                {
+                    ForegroundColor = ConsoleColor.DarkGreen;
+                    Write(ChoiceContext[i] + "\n");
+                }
+                ResetColor();
             }
         }
 
