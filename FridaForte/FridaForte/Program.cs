@@ -31,6 +31,7 @@ namespace FridaForte
                 Typer(WordWrapper(location.Message));
                 canContinue = CanContinue(location, canContinue);
             }
+            Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
         }
 
         private static bool CanContinue(Location location, bool canContinue)
@@ -59,7 +60,9 @@ namespace FridaForte
                 else // user inputs neither danger choice nor correct choice
                 {
                     WriteLine("************************");
+                    ForegroundColor = ConsoleColor.Red;
                     Typer($"You entered: {input}");
+                    ResetColor();
                     Typer("I don't understand that command.");
                     WriteLine("************************");
                     Typer("Please try again.");
@@ -132,7 +135,7 @@ namespace FridaForte
             for (int i = 0; i < str.Length; i++)
             {
                 Write(str[i]);
-                System.Threading.Thread.Sleep(3);
+                System.Threading.Thread.Sleep(1);
             }
             WriteLine();
         }
