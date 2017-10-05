@@ -56,18 +56,6 @@ namespace FridaForte
             string jsonFile = path + "../../../GameContent.json";
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
 
-            // need to change this loop to a switch or if/else statement
-            //for (int i = 0; i < locations.Length; i++)
-            //{
-            //    WriteLine(locations[i].Name);
-            //    WriteLine(locations[i].Message);
-            //    WriteLine("\n\n***********");
-            //    WriteLine("Choices");
-            //    WriteLine("***********");
-            //    WriteLine(locations[i].Choices[0]);
-            //    WriteLine(locations[i].Choices[1]);
-            //}
-
             return locations;
         }
 
