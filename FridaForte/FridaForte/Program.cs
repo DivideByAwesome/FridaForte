@@ -58,8 +58,11 @@ namespace FridaForte
                 }
                 else // user inputs neither danger choice nor correct choice
                 {
-                    Typer($"\nYou entered: {input}");
-                    Typer("I don't understand that command.\nPlease try again.");
+                    WriteLine("************************");
+                    Typer($"You entered: {input}");
+                    Typer("I don't understand that command.");
+                    WriteLine("************************");
+                    Typer("Please try again.");
                 }
             } while (!(isWrongChoice || isCorrectChoice));
 
