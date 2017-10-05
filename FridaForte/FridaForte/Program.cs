@@ -12,40 +12,59 @@ namespace FridaForte
     public class Program
     {
         static void Main(string[] args)
-        {
-            string input = string.Empty;
-            Player player = new Player();
-            Location[] locations = GetContent();
-            WelcomePlayer(player);
-
-            for (int i = 0; i < locations.Length; ++i)
-            {
-                Typer(locations[i].Name);
-                Typer(WordWrapper(locations[i].Message));
-                do
-                {
-                    locations[i].ShowChoices();
-                    input = GetInput("\nEnter your decision: ");
-                    if (input.Contains(locations[i].Choices[0].ToLower()))
-                    {
-                        Typer(locations[i].Danger);
-                        return;
-                    }
-                    else if (input.Contains(locations[i].Choices[1].ToLower()))
-                    {
-                        Typer(locations[i].CorrectChoice);
-                    }
-                    else // user inputs neither danger choice nor correct choice
-                    {
-                        WriteLine($"\nYou entered: {input}");
-                        WriteLine("I don't understand that command.\nPlease try again.");
-                    }
-                } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower())));
-            }
-
-
+        {                      
+            WelcomePlayer();
+            RunGame();        
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         } // End Main()
+
+        private static void RunGame()
+        {
+            Location[] locations = GetContent();
+            Location location;
+            bool canContinue = true;
+            
+            for (int i = 0; i < locations.Length && canContinue; ++i)
+            {
+                location = locations[i];
+                Typer(location.Name);
+                Typer(WordWrapper(location.Message));
+                canContinue = CanContinue(location, canContinue);
+            }
+        }
+
+        private static bool CanContinue(Location location, bool canContinue)
+        {
+            string input = string.Empty;
+            bool isWrongChoice = false;
+            bool isCorrectChoice = false;
+            
+            do
+            {
+                location.ShowChoices();
+                input = GetInput("\nEnter your decision: ");
+                isWrongChoice = input.Contains(location.Choices[0].ToLower());
+                isCorrectChoice = input.Contains(location.Choices[1].ToLower());
+
+                if (isWrongChoice)
+                {
+                    Typer(location.Danger);
+                    canContinue = false;
+                }
+                else if (isCorrectChoice)
+                {
+                    Typer(location.CorrectChoice);
+                    canContinue = true;
+                }
+                else // user inputs neither danger choice nor correct choice
+                {
+                    WriteLine($"\nYou entered: {input}");
+                    WriteLine("I don't understand that command.\nPlease try again.");
+                }
+            } while (!(isWrongChoice || isCorrectChoice));
+
+            return canContinue;
+        }
 
         public static Location[] GetContent()
         {
@@ -54,23 +73,13 @@ namespace FridaForte
             string jsonFile = path + "../../../GameContent.json";
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
 
-            // need to change this loop to a switch or if/else statement
-            //for (int i = 0; i < locations.Length; i++)
-            //{
-            //    WriteLine(locations[i].Name);
-            //    WriteLine(locations[i].Message);
-            //    WriteLine("\n\n***********");
-            //    WriteLine("Choices");
-            //    WriteLine("***********");
-            //    WriteLine(locations[i].Choices[0]);
-            //    WriteLine(locations[i].Choices[1]);
-            //}
-
             return locations;
         }
 
-        private static void WelcomePlayer(Player player)
+        private static void WelcomePlayer()
         {
+            Player player = new Player();
+
             Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
             Typer("\nWelcome Player!");
             Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
