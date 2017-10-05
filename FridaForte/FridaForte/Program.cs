@@ -21,38 +21,47 @@ namespace FridaForte
         private static void RunGame()
         {
             Location[] locations = GetContent();
-            string input = string.Empty;
-            bool isWrongChoice = false;
-            bool isCorrectChoice = false;
-
-            for (int i = 0; i < locations.Length; ++i)
+            bool canContinue = true;
+            
+            for (int i = 0; i < locations.Length && canContinue; ++i)
             {
                 Typer(locations[i].Name);
                 Typer(WordWrapper(locations[i].Message));
-                
-                do
-                {
-                    locations[i].ShowChoices();
-                    input = GetInput("\nEnter your decision: ");
-                    isWrongChoice = input.Contains(locations[i].Choices[0].ToLower());
-                    isCorrectChoice = input.Contains(locations[i].Choices[1].ToLower());
-
-                    if (isWrongChoice)
-                    {
-                        Typer(locations[i].Danger);
-                        return;
-                    }
-                    else if (isCorrectChoice)
-                    {
-                        Typer(locations[i].CorrectChoice);
-                    }
-                    else // user inputs neither danger choice nor correct choice
-                    {
-                        WriteLine($"\nYou entered: {input}");
-                        WriteLine("I don't understand that command.\nPlease try again.");
-                    }
-                } while (!(isWrongChoice || isCorrectChoice));
+                canContinue = MakeDecision(locations, i, canContinue);
             }
+        }
+
+        private static bool MakeDecision(Location[] locations, int i, bool canContinue)
+        {
+            string input = string.Empty;
+            bool isWrongChoice = false;
+            bool isCorrectChoice = false;
+            
+            do
+            {
+                locations[i].ShowChoices();
+                input = GetInput("\nEnter your decision: ");
+                isWrongChoice = input.Contains(locations[i].Choices[0].ToLower());
+                isCorrectChoice = input.Contains(locations[i].Choices[1].ToLower());
+
+                if (isWrongChoice)
+                {
+                    Typer(locations[i].Danger);
+                    canContinue = false;
+                }
+                else if (isCorrectChoice)
+                {
+                    Typer(locations[i].CorrectChoice);
+                    canContinue = true;
+                }
+                else // user inputs neither danger choice nor correct choice
+                {
+                    WriteLine($"\nYou entered: {input}");
+                    WriteLine("I don't understand that command.\nPlease try again.");
+                }
+            } while (!(isWrongChoice || isCorrectChoice));
+
+            return canContinue;
         }
 
         public static Location[] GetContent()
