@@ -19,7 +19,7 @@
   },
   {
     "name": "\n\nFort Point\n\n",
-    "message": "Two days have passed. You have arrived at Fort Point.  Since you don't have any supplies or equipment, you need to go foraging to gather the medicinal herbs needed to help Asher.  You speak to the locals to figure out the lay of the land. After several interviews, you deduce that there are two good foraging spots near town:",
+    "message": "Two days have passed. You step off the train in Fort Point.  Since you don't have any supplies or equipment, you need to go foraging to gather the medicinal herbs needed to help Asher.  You speak to the locals to figure out the lay of the land. After several interviews, you deduce that there are two good foraging spots near town:",
     "choices": [ "Go to the Forest", "Go to the Meadow" ],
     "uniqueWords": [ "forest", "meadow" ],
     "choiceContext": [ "An array (get it?!?) of medicinal splendor in the form of wondrous fungi and barks.", "Many medicinal fruits and herbs can be harvested here." ],
