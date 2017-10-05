@@ -29,8 +29,8 @@ namespace FridaForte
         }
 
         public void ShowChoices()
-        {
-            WriteLine("\nWhat do you want to do?\n");
+        {           
+            Program.Typer("\nWhat do you want to do?\n");
             WriteLine(Choices[0]);
             Write(ChoiceContext[0] + "\n");
             for (int i = 1; i < Choices.Length; i++)
