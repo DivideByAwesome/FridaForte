@@ -43,8 +43,8 @@ namespace FridaForte
             {
                 location.ShowChoices();
                 input = GetInput("\nEnter your decision: ");
-                isWrongChoice = input.Contains(location.Choices[0].ToLower());
-                isCorrectChoice = input.Contains(location.Choices[1].ToLower());
+                isWrongChoice = input.Contains(location.UniqueWords[0].ToLower());
+                isCorrectChoice = input.Contains(location.UniqueWords[1].ToLower());
 
                 if (isWrongChoice)
                 {
@@ -58,8 +58,8 @@ namespace FridaForte
                 }
                 else // user inputs neither danger choice nor correct choice
                 {
-                    WriteLine($"\nYou entered: {input}");
-                    WriteLine("I don't understand that command.\nPlease try again.");
+                    Typer($"\nYou entered: {input}");
+                    Typer("I don't understand that command.\nPlease try again.");
                 }
             } while (!(isWrongChoice || isCorrectChoice));
 
@@ -124,7 +124,7 @@ namespace FridaForte
             return lines.ToString();
         }
 
-        static void Typer(string str)
+        internal static void Typer(string str)
         {
             for (int i = 0; i < str.Length; i++)
             {
