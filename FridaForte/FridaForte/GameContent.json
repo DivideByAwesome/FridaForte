@@ -13,16 +13,16 @@
     "message": "You are packed and ready to go. You now have to decide on transportation.",
     "choices": [ "Ride horse", "Take train" ],
     "uniqueWords": [ "horse", "train" ],
-    "choiceContext": [ null, null ],
+    "choiceContext": [ "You can take your trusty steed which would allow you to bring all your equipment. It will take a week for you to arrive in Fort Point.", "You have just enough money to buy a train ticket and can't afford to pay to ship your equipment. This means you have to gather supplies once you arrive in Fort Point. It will take 2 days for you to arrive in Fort Point." ],
     "danger": "Good thinking! You decide taking your equipment is important. However, time is valuable. Unfortunately, the ride is too long and your cousin has taken a turn for the worse. Asher has passed away. Game Over.",
-    "correctChoice": "You have just enough money to buy a train ticket and can't afford to pay to ship your equipment. This means you have to gather supplies once you arrive in Fort Point. It will take 2 days for you to arrive in Fort Point."
+    "correctChoice": "You decide to buy a train ticket and are now on your way to Fort Point. Safe travels!"
   },
   {
     "name": "\n\nFort Point\n\n",
     "message": "Two days have passed. You have arrived at Fort Point.  Since you don't have any supplies or equipment, you need to go foraging to gather the medicinal herbs needed to help Asher.  You speak to the locals to figure out the lay of the land. After several interviews, you deduce that there are two good foraging spots near town:",
     "choices": [ "Go to the Forest", "Go to the Meadow" ],
     "uniqueWords": [ "forest", "meadow" ],
-    "choiceContext": [ "The Forest – An array (get it?!?) of medicinal splendor in the form of wondrous fungi and barks.", "The Meadow – Many medicinal fruits and herbs can be harvested here." ],
+    "choiceContext": [ "An array (get it?!?) of medicinal splendor in the form of wondrous fungi and barks.", "Many medicinal fruits and herbs can be harvested here." ],
     "danger": "You know that old saying, \"If a tree falls in the forest,make a sound?\" This tree did; you are dead. Game Over.",
     "correctChoice": "It takes you an hour to walk to the meadows. You arrive in the mid-afternoon."
   },

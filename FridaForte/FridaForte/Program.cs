@@ -43,8 +43,8 @@ namespace FridaForte
             {
                 location.ShowChoices();
                 input = GetInput("\nEnter your decision: ");
-                isWrongChoice = input.Contains(location.Choices[0].ToLower());
-                isCorrectChoice = input.Contains(location.Choices[1].ToLower());
+                isWrongChoice = input.Contains(location.UniqueWords[0].ToLower());
+                isCorrectChoice = input.Contains(location.UniqueWords[1].ToLower());
 
                 if (isWrongChoice)
                 {
