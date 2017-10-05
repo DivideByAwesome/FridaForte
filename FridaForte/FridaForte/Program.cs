@@ -38,7 +38,9 @@ namespace FridaForte
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
                 location = locations[i];
+                BackgroundColor = ConsoleColor.DarkMagenta;
                 Typer("Location: " + location.Name);
+                ResetColor();
                 Typer(WordWrapper(location.Message));
                 canContinue = CanContinue(location, canContinue);
             }
@@ -65,7 +67,7 @@ namespace FridaForte
                 }
                 else if (isCorrectChoice)
                 {
-                    Typer(location.CorrectChoice);
+                    Typer(WordWrapper($"\n{location.CorrectChoice}"));
                     canContinue = true;
                 }
                 else // user inputs neither danger choice nor correct choice
@@ -80,7 +82,7 @@ namespace FridaForte
                 }
             } while (!(isWrongChoice || isCorrectChoice));
 
-            Thread.Sleep(4000);
+            ReadLine();
             Clear();
 
             return canContinue;
@@ -99,10 +101,13 @@ namespace FridaForte
         private static void WelcomePlayer()
         {
             Player player = new Player();
-
-            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
+            Typer("************************************************\n");
+            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire\n");
+            Typer("************************************************");
             Typer("\nWelcome Player!");
-            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
+            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
+            ReadLine();
+            Clear();
         }
 
         public static string GetInput(string prompt)
@@ -110,6 +115,7 @@ namespace FridaForte
             return Validator.ValidateString(prompt).ToLower();
         }
 
+        //Word wrapper
         static string WordWrapper(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
@@ -117,12 +123,12 @@ namespace FridaForte
                 return string.Empty;
             }
 
-            int approxLineCount = paragraph.Length / WindowWidth;
+            int approxLineCount = paragraph.Length / 80;
             StringBuilder lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
 
             for (int i = 0; i < paragraph.Length;)
             {
-                int grabLimit = Math.Min(WindowWidth, paragraph.Length - i);
+                int grabLimit = Math.Min(80, paragraph.Length - i);
                 string line = paragraph.Substring(i, grabLimit);
 
                 bool isLastChunk = grabLimit + i == paragraph.Length;
@@ -144,6 +150,7 @@ namespace FridaForte
             return lines.ToString();
         }
 
+        //Typewriter effect
         internal static void Typer(string str)
         {
             for (int i = 0; i < str.Length; i++)
