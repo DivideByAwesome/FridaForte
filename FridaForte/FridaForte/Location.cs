@@ -38,7 +38,7 @@ namespace FridaForte
             if (!(ChoiceContext[0] == null))
             {
                 ForegroundColor = ConsoleColor.DarkGreen;
-                Write(ChoiceContext[0] + "\n");
+                Write(Program.WordWrapper(ChoiceContext[0] + "\n"));
             }
 
             for (int i = 1; i < Choices.Length; i++)
@@ -52,7 +52,7 @@ namespace FridaForte
                 if (!(ChoiceContext[i] == null))
                 {
                     ForegroundColor = ConsoleColor.DarkGreen;
-                    Write(ChoiceContext[i] + "\n");
+                    Write(Program.WordWrapper(ChoiceContext[i] + "\n"));
                 }
                 ResetColor();
             }

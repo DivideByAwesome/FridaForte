@@ -25,7 +25,7 @@ namespace FridaForte
             WriteLine("\nBrought to you by the A-Team:\n");
             WriteLine("Scrum Master/Team Lead: Sara Jade https://www.linkedin.com/in/sara-jade/");
             WriteLine("Super Coding Diva: Sugey Valencia https://www.linkedin.com/in/sugey-valencia-955667140/");
-            WriteLine("Rockin' Feature Developer: Roscoe Bass https://www.linkedin.com/in/roscoebass/");
+            WriteLine("Rockin' Feature Developer: Roscoe Bass III https://www.linkedin.com/in/roscoebass/");
             WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
         }
 
@@ -38,7 +38,9 @@ namespace FridaForte
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
                 location = locations[i];
+                BackgroundColor = ConsoleColor.DarkMagenta;
                 Typer("Location: " + location.Name);
+                ResetColor();
                 Typer(WordWrapper(location.Message));
                 canContinue = CanContinue(location, canContinue);
             }
@@ -60,12 +62,12 @@ namespace FridaForte
 
                 if (isWrongChoice)
                 {
-                    Typer(location.Danger);
+                    Typer(WordWrapper($"\n{location.Danger}"));
                     canContinue = false;
                 }
                 else if (isCorrectChoice)
                 {
-                    Typer(location.CorrectChoice);
+                    Typer(WordWrapper($"\n{location.CorrectChoice}"));
                     canContinue = true;
                 }
                 else // user inputs neither danger choice nor correct choice
@@ -80,7 +82,7 @@ namespace FridaForte
                 }
             } while (!(isWrongChoice || isCorrectChoice));
 
-            Thread.Sleep(4000);
+            ReadLine();
             Clear();
 
             return canContinue;
@@ -99,10 +101,13 @@ namespace FridaForte
         private static void WelcomePlayer()
         {
             Player player = new Player();
-
-            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
+            Typer("************************************************\n");
+            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire\n");
+            Typer("************************************************");
             Typer("\nWelcome Player!");
-            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
+            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
+            ReadLine();
+            Clear();
         }
 
         public static string GetInput(string prompt)
@@ -110,19 +115,20 @@ namespace FridaForte
             return Validator.ValidateString(prompt).ToLower();
         }
 
-        static string WordWrapper(string paragraph)
+        //Word wrapper
+        internal static string WordWrapper(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
                 return string.Empty;
             }
 
-            int approxLineCount = paragraph.Length / WindowWidth;
+            int approxLineCount = paragraph.Length / 80;
             StringBuilder lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
 
             for (int i = 0; i < paragraph.Length;)
             {
-                int grabLimit = Math.Min(WindowWidth, paragraph.Length - i);
+                int grabLimit = Math.Min(80, paragraph.Length - i);
                 string line = paragraph.Substring(i, grabLimit);
 
                 bool isLastChunk = grabLimit + i == paragraph.Length;
@@ -144,6 +150,7 @@ namespace FridaForte
             return lines.ToString();
         }
 
+        //Typewriter effect
         internal static void Typer(string str)
         {
             for (int i = 0; i < str.Length; i++)
