@@ -26,12 +26,12 @@ namespace FridaForte
                 {
                     locations[i].ShowChoices();
                     input = GetInput("\nEnter your decision: ");
-                    if (input.Contains(locations[i].Choices[0].ToLower()))
+                    if (input.Contains(locations[i].UniqueWords[0].ToLower()))
                     {
                         Typer(locations[i].Danger);
                         return;
                     }
-                    else if (input.Contains(locations[i].Choices[1].ToLower()))
+                    else if (input.Contains(locations[i].UniqueWords[1].ToLower()))
                     {
                         Typer(locations[i].CorrectChoice);
                     }
@@ -40,7 +40,7 @@ namespace FridaForte
                         WriteLine($"\nYou entered: {input}");
                         WriteLine("I don't understand that command.\nPlease try again.");
                     }
-                } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower())));
+                } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower()) || input.Contains(locations[i].UniqueWords[0].ToLower()) || input.Contains(locations[i].UniqueWords[0].ToLower())));
             }
 
 
