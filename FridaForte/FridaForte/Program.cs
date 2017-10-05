@@ -13,10 +13,17 @@ namespace FridaForte
     {
         static void Main(string[] args)
         {
-            string input = string.Empty;
-            Player player = new Player();
-            Location[] locations = GetContent();
+            Player player = new Player();            
             WelcomePlayer(player);
+            RunGame();           
+
+            ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
+        } // End Main()
+
+        private static void RunGame()
+        {
+            Location[] locations = GetContent();
+            string input = string.Empty;
 
             for (int i = 0; i < locations.Length; ++i)
             {
@@ -42,10 +49,7 @@ namespace FridaForte
                     }
                 } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower())));
             }
-
-
-            ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
-        } // End Main()
+        }
 
         public static Location[] GetContent()
         {
