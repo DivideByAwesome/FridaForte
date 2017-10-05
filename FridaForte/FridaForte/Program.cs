@@ -25,7 +25,7 @@ namespace FridaForte
             WriteLine("\nBrought to you by the A-Team:\n");
             WriteLine("Scrum Master/Team Lead: Sara Jade https://www.linkedin.com/in/sara-jade/");
             WriteLine("Super Coding Diva: Sugey Valencia https://www.linkedin.com/in/sugey-valencia-955667140/");
-            WriteLine("Rockin' Feature Developer: Roscoe Bass https://www.linkedin.com/in/roscoebass/");
+            WriteLine("Rockin' Feature Developer: Roscoe Bass III https://www.linkedin.com/in/roscoebass/");
             WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
         }
 
@@ -62,7 +62,7 @@ namespace FridaForte
 
                 if (isWrongChoice)
                 {
-                    Typer(location.Danger);
+                    Typer(WordWrapper($"\n{location.Danger}"));
                     canContinue = false;
                 }
                 else if (isCorrectChoice)
@@ -116,7 +116,7 @@ namespace FridaForte
         }
 
         //Word wrapper
-        static string WordWrapper(string paragraph)
+        internal static string WordWrapper(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
