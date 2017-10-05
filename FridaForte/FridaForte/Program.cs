@@ -22,21 +22,27 @@ namespace FridaForte
         {
             Location[] locations = GetContent();
             string input = string.Empty;
+            bool isWrongChoice = false;
+            bool isCorrectChoice = false;
 
             for (int i = 0; i < locations.Length; ++i)
             {
                 Typer(locations[i].Name);
                 Typer(WordWrapper(locations[i].Message));
+                
                 do
                 {
                     locations[i].ShowChoices();
                     input = GetInput("\nEnter your decision: ");
-                    if (input.Contains(locations[i].Choices[0].ToLower()))
+                    isWrongChoice = input.Contains(locations[i].Choices[0].ToLower());
+                    isCorrectChoice = input.Contains(locations[i].Choices[1].ToLower());
+
+                    if (isWrongChoice)
                     {
                         Typer(locations[i].Danger);
                         return;
                     }
-                    else if (input.Contains(locations[i].Choices[1].ToLower()))
+                    else if (isCorrectChoice)
                     {
                         Typer(locations[i].CorrectChoice);
                     }
@@ -45,7 +51,7 @@ namespace FridaForte
                         WriteLine($"\nYou entered: {input}");
                         WriteLine("I don't understand that command.\nPlease try again.");
                     }
-                } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower())));
+                } while (!(isWrongChoice || isCorrectChoice));
             }
         }
 
