@@ -12,11 +12,9 @@ namespace FridaForte
     public class Program
     {
         static void Main(string[] args)
-        {
-            Player player = new Player();            
-            WelcomePlayer(player);
-            RunGame();           
-
+        {                      
+            WelcomePlayer();
+            RunGame();        
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         } // End Main()
 
@@ -73,8 +71,10 @@ namespace FridaForte
             return locations;
         }
 
-        private static void WelcomePlayer(Player player)
+        private static void WelcomePlayer()
         {
+            Player player = new Player();
+
             Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
             Typer("\nWelcome Player!");
             Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
