@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Console; // Now lazy devs don't have to type "Console" while coding!
 
@@ -68,6 +69,9 @@ namespace FridaForte
                     Typer("Please try again.");
                 }
             } while (!(isWrongChoice || isCorrectChoice));
+
+            Thread.Sleep(2000);
+            Clear();
 
             return canContinue;
         }

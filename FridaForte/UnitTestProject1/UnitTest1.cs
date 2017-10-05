@@ -21,15 +21,16 @@ namespace UnitTestProject1
         public void TestLocationClassInstantition()
         {
             Location pharmacy = new Location(
-                "Pharmacy", 
+                "Pharmacy",
                 "Leaving the pharmacy....",
-                "Open the door!",
-                new string[] {"Open", "Close" }, "correct", "dead");
+                 new string[] { "Open the door!","close door" },
+                 new string[] { "Open", "Close" }, "correct", "dead",
+                 new string[] { "stay", "help" });
 
-            Assert.IsInstanceOfType(pharmacy, typeof (Location));
+            Assert.IsInstanceOfType(pharmacy, typeof(Location));
             Assert.AreEqual("Pharmacy", pharmacy.Name);
             Assert.AreEqual("Leaving the pharmacy....", pharmacy.Message);
-            Assert.AreEqual("Open the door!", pharmacy.Hint);
+            Assert.AreEqual("Open the door!", pharmacy.ChoiceContext[0]);
             Assert.AreEqual("Open", pharmacy.Choices[0]);
             Assert.AreEqual("Close", pharmacy.Choices[1]);
             Assert.AreEqual("correct", pharmacy.CorrectChoice);
@@ -70,12 +71,14 @@ namespace UnitTestProject1
             Location location = new Location(
                 "Pharmacy",
                 "Leaving the pharmacy....",
-                "Open the door!",
-                new string[] { "stay", "go" }, "correct", "dead");
-
-            string expected1 = "stay";
+                 new string[] { "Open the door!" },
+                 new string[] { "open", "close" }, 
+                 "correct",
+                 "dead",
+                 new string[] { "stay", "help" });
+            string expected1 = "open";
             bool isWrongChoice = expected1.Contains(location.Choices[0].ToLower());
-            string expected2 = "go";
+            string expected2 = "close";
             bool isCorrectChoice = expected2.Contains(location.Choices[1].ToLower());
 
             Assert.AreEqual(expected1, location.Choices[0]);
@@ -83,6 +86,39 @@ namespace UnitTestProject1
             Assert.IsTrue(isWrongChoice);
             Assert.IsTrue(isCorrectChoice);
         }
+        [TestMethod]
+        public void TestRunGame()
+        {
+            Location pharmacy = new Location(
+               "Pharmacy",
+               "Leaving the pharmacy....",
+               new string[] { "Open the door!" },
+               new string[] { "Open", "Close" }, "correct", "dead",
+               new string[] { "stay", "help" });
+            Location meadow = new Location(
+               "Meadow",
+               "Leaving the meadow....",
+               new string[] { "Open the door!" },
+               new string[] { "leave", "stay" }, "correct", "dead",
+               new string[] { "stay", "help" });
 
+            Location[] locations = { pharmacy, meadow };
+
+            int index = 0;
+
+            for (int i = 0; i < locations.Length; i++)
+            {
+                index = i;
+            }
+
+            bool canContinue = true;
+            for (int i = 0; i < 10 || canContinue; i++)
+            {
+                canContinue = false;
+            }
+
+            Assert.AreEqual(locations.Length - 1, index);
+            Assert.AreEqual(false, canContinue);
+        }
     } // End class UnitTest1
 }
