@@ -64,5 +64,25 @@ namespace UnitTestProject1
             Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
 
+        [TestMethod]
+        public void TestProgramCanContinue()
+        {
+            Location location = new Location(
+                "Pharmacy",
+                "Leaving the pharmacy....",
+                "Open the door!",
+                new string[] { "stay", "go" }, "correct", "dead");
+
+            string expected1 = "stay";
+            bool isWrongChoice = expected1.Contains(location.Choices[0].ToLower());
+            string expected2 = "go";
+            bool isCorrectChoice = expected2.Contains(location.Choices[1].ToLower());
+
+            Assert.AreEqual(expected1, location.Choices[0]);
+            Assert.AreEqual(expected2, location.Choices[1]);
+            Assert.IsTrue(isWrongChoice);
+            Assert.IsTrue(isCorrectChoice);
+        }
+
     } // End class UnitTest1
 }
