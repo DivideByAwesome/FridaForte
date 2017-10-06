@@ -27,7 +27,7 @@ namespace FridaForte
             WriteLine("Rockin' Feature Developer: Roscoe Bass III https://www.linkedin.com/in/roscoebass/");
             WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
         }
-
+        //Start Game
         private static void RunGame()
         {
             Location[] locations = GetContent();
