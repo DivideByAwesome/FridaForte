@@ -61,6 +61,9 @@ namespace UnitTestProject1
             Assert.IsNotNull(actual);
 
             Location[] actuals = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(actual));
+
+            Assert.IsInstanceOfType(actuals[0], typeof(Location));
+            Assert.IsInstanceOfType(actuals[0].UniqueWords, typeof(Array));
             Assert.IsNotNull(actuals);
             Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
