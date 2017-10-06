@@ -13,10 +13,9 @@ namespace FridaForte
     public class Program
     {
         static void Main(string[] args)
-        {                      
+        {
             WelcomePlayer();
             RunGame();
-            ShowAuthors();
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         } // End Main()
 
@@ -34,7 +33,7 @@ namespace FridaForte
             Location[] locations = GetContent();
             Location location;
             bool canContinue = true;
-            
+
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
                 location = locations[i];
@@ -44,6 +43,7 @@ namespace FridaForte
                 Typer(WordWrapper(location.Message));
                 canContinue = CanContinue(location, canContinue);
             }
+            ShowAuthors();
             Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
         }
 
@@ -52,13 +52,18 @@ namespace FridaForte
             string input = string.Empty;
             bool isWrongChoice = false;
             bool isCorrectChoice = false;
-            
+
             do
             {
                 location.ShowChoices();
                 input = GetInput("\nEnter your decision: ");
-                isWrongChoice = location.DangerUniqueWords.Contains(input.ToLower());
-                isCorrectChoice = location.CorrectUniqueWords.Contains(input.ToLower());
+                // add method to make input into an array to check in each Choice array for matches
+                // splits input into array of words
+                char[] seperatorChars = { ' ', ',' };
+                string[] words = input.Split(seperatorChars);
+
+                isCorrectChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
+                isWrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
 
                 if (isWrongChoice && !isCorrectChoice)
                 {
@@ -81,12 +86,25 @@ namespace FridaForte
                     WriteLine("************************");
                     Typer("Please try again.");
                 }
+
             } while (!(isWrongChoice || isCorrectChoice) || (isWrongChoice && isCorrectChoice));
 
             ReadKey();
             Clear();
 
             return canContinue;
+        }
+
+        public static bool IsFoundUniqueWords(string[] uniqueWords, string[] words)
+        {
+            for (int i = 0; i < words.Length; ++i)
+            {
+                if (uniqueWords.Contains(words[i].ToLower()))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static Location[] GetContent()
@@ -107,7 +125,7 @@ namespace FridaForte
             Typer("************************************************");
             Typer("\nWelcome Player!");
             Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
-            ReadLine();
+            ReadKey();
             Clear();
         }
 
