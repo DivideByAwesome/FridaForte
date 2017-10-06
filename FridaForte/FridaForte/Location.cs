@@ -11,33 +11,54 @@ namespace FridaForte
     {
         public string Name { get; }
         public string Message { get; }
-        public string Hint { get; }
+        public string[] ChoiceContext;
         public string[] Choices;
+        public string[] CorrectUniqueWords { get; }
+        public string[] DangerUniqueWords { get; }
         public string Danger { get; }
         public string CorrectChoice { get; }
 
-        public Location(string name, string message, string hint, string[] choices, string correctChoice, string danger)
+        public Location(string name, string message, string[] choiceContext, string[] choices, string correctChoice, string danger, string[] correctUniqueWords, string[] dangerUniqueWords)
         {
             Name = name;
             Message = message;
-            Hint = hint;
-
-
+            ChoiceContext = choiceContext;
             Choices = choices;
+            CorrectUniqueWords = correctUniqueWords;
+            DangerUniqueWords = dangerUniqueWords;
             Danger = danger;
             CorrectChoice = correctChoice;
         }
 
         public void ShowChoices()
         {
-            WriteLine("\nWhat do you want to do?\n");
-
+            Program.Typer("\nWhat do you want to do?\n");
+            ForegroundColor = ConsoleColor.Gray;
+            BackgroundColor = ConsoleColor.DarkGreen;
             WriteLine(Choices[0]);
+            ResetColor();
+            if (!(ChoiceContext[0] == null))
+            {
+                ForegroundColor = ConsoleColor.DarkGreen;
+                Write(Program.WordWrapper(ChoiceContext[0] + "\n"));
+            }
+
             for (int i = 1; i < Choices.Length; i++)
             {
-                WriteLine("or");
+                ResetColor();
+                WriteLine("-or-");
+                ForegroundColor = ConsoleColor.Gray;
+                BackgroundColor = ConsoleColor.DarkGreen;
                 WriteLine(Choices[i]);
+                ResetColor();
+                if (!(ChoiceContext[i] == null))
+                {
+                    ForegroundColor = ConsoleColor.DarkGreen;
+                    Write(Program.WordWrapper(ChoiceContext[i] + "\n"));
+                }
+                ResetColor();
             }
         }
+
     }
 }

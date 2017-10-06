@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Console; // Now lazy devs don't have to type "Console" while coding!
 
@@ -13,39 +14,98 @@ namespace FridaForte
     {
         static void Main(string[] args)
         {
-            string input = string.Empty;
-            Player player = new Player();
-            Location[] locations = GetContent();
-            WelcomePlayer(player);
-
-            for (int i = 0; i < locations.Length; ++i)
-            {
-                Typer(locations[i].Name);
-                Typer(WordWrapper(locations[i].Message));
-                do
-                {
-                    locations[i].ShowChoices();
-                    input = GetInput("\nEnter your decision: ");
-                    if (input.Contains(locations[i].Choices[0].ToLower()))
-                    {
-                        Typer(locations[i].Danger);
-                        return;
-                    }
-                    else if (input.Contains(locations[i].Choices[1].ToLower()))
-                    {
-                        Typer(locations[i].CorrectChoice);
-                    }
-                    else // user inputs neither danger choice nor correct choice
-                    {
-                        WriteLine($"\nYou entered: {input}");
-                        WriteLine("I don't understand that command.\nPlease try again.");
-                    }
-                } while (!(input.Contains(locations[i].Choices[0].ToLower()) || input.Contains(locations[i].Choices[1].ToLower())));
-            }
-
-
+            WelcomePlayer();
+            RunGame();
             ReadKey(); // This command pauses the console so user has time to read it and dev has time to see results.
         } // End Main()
+
+        private static void ShowAuthors()
+        {
+            WriteLine("\nBrought to you by the A-Team:\n");
+            WriteLine("Scrum Master/Fearless Leader: Sara Jade https://www.linkedin.com/in/sara-jade/");
+            WriteLine("Super Coding Diva: Sugey Valencia https://www.linkedin.com/in/sugey-valencia-955667140/");
+            WriteLine("Rockin' Feature Developer: Roscoe Bass III https://www.linkedin.com/in/roscoebass/");
+            WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
+        }
+
+        private static void RunGame()
+        {
+            Location[] locations = GetContent();
+            Location location;
+            bool canContinue = true;
+
+            for (int i = 0; i < locations.Length && canContinue; ++i)
+            {
+                location = locations[i];
+                BackgroundColor = ConsoleColor.DarkMagenta;
+                Typer("Location: " + location.Name);
+                ResetColor();
+                Typer(WordWrapper(location.Message));
+                canContinue = CanContinue(location, canContinue);
+            }
+            ShowAuthors();
+            Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
+        }
+
+        private static bool CanContinue(Location location, bool canContinue)
+        {
+            string input = string.Empty;
+            bool isWrongChoice = false;
+            bool isCorrectChoice = false;
+
+            do
+            {
+                location.ShowChoices();
+                input = GetInput("\nEnter your decision: ");
+                // add method to make input into an array to check in each Choice array for matches
+                // splits input into array of words
+                char[] seperatorChars = { ' ', ',' };
+                string[] words = input.Split(seperatorChars);
+
+                isCorrectChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
+                isWrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
+
+                if (isWrongChoice && !isCorrectChoice)
+                {
+                    Typer(WordWrapper($"\n{location.Danger}"));
+                    canContinue = false;
+                }
+                else if (isCorrectChoice && !isWrongChoice)
+                {
+                    Typer(WordWrapper($"\n{location.CorrectChoice}"));
+                    canContinue = true;
+                }
+                else // user inputs neither danger choice nor correct choice,
+                     // or user inputs both correct and danger
+                {
+                    WriteLine("************************");
+                    ForegroundColor = ConsoleColor.Red;
+                    Typer($"You entered: {input}");
+                    ResetColor();
+                    Typer("I don't understand that command.");
+                    WriteLine("************************");
+                    Typer("Please try again.");
+                }
+
+            } while (!(isWrongChoice || isCorrectChoice) || (isWrongChoice && isCorrectChoice));
+
+            ReadKey();
+            Clear();
+
+            return canContinue;
+        }
+
+        public static bool IsFoundUniqueWords(string[] uniqueWords, string[] words)
+        {
+            for (int i = 0; i < words.Length; ++i)
+            {
+                if (uniqueWords.Contains(words[i].ToLower()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public static Location[] GetContent()
         {
@@ -54,26 +114,19 @@ namespace FridaForte
             string jsonFile = path + "../../../GameContent.json";
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
 
-            // need to change this loop to a switch or if/else statement
-            //for (int i = 0; i < locations.Length; i++)
-            //{
-            //    WriteLine(locations[i].Name);
-            //    WriteLine(locations[i].Message);
-            //    WriteLine("\n\n***********");
-            //    WriteLine("Choices");
-            //    WriteLine("***********");
-            //    WriteLine(locations[i].Choices[0]);
-            //    WriteLine(locations[i].Choices[1]);
-            //}
-
             return locations;
         }
 
-        private static void WelcomePlayer(Player player)
+        private static void WelcomePlayer()
         {
-            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire");
+            Player player = new Player();
+            Typer("************************************************\n");
+            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire\n");
+            Typer("************************************************");
             Typer("\nWelcome Player!");
-            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire! {player.FirstName} has had a modest and quiet life so far, but all of that is about to change.");
+            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
+            ReadKey();
+            Clear();
         }
 
         public static string GetInput(string prompt)
@@ -81,19 +134,20 @@ namespace FridaForte
             return Validator.ValidateString(prompt).ToLower();
         }
 
-        static string WordWrapper(string paragraph)
+        //Word wrapper
+        internal static string WordWrapper(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
                 return string.Empty;
             }
 
-            int approxLineCount = paragraph.Length / WindowWidth;
+            int approxLineCount = paragraph.Length / 80;
             StringBuilder lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
 
             for (int i = 0; i < paragraph.Length;)
             {
-                int grabLimit = Math.Min(WindowWidth, paragraph.Length - i);
+                int grabLimit = Math.Min(80, paragraph.Length - i);
                 string line = paragraph.Substring(i, grabLimit);
 
                 bool isLastChunk = grabLimit + i == paragraph.Length;
@@ -115,12 +169,13 @@ namespace FridaForte
             return lines.ToString();
         }
 
-        static void Typer(string str)
+        //Typewriter effect
+        internal static void Typer(string str)
         {
             for (int i = 0; i < str.Length; i++)
             {
                 Write(str[i]);
-                System.Threading.Thread.Sleep(3);
+                System.Threading.Thread.Sleep(1);
             }
             WriteLine();
         }
