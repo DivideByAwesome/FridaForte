@@ -15,7 +15,7 @@
     "choices": [ "Ride horse", "Take train" ],
     "choiceContext": [ "You can take your trusty steed which would allow you to bring all your equipment. It will take a week for you to arrive in Fort Point.", "You have just enough money to buy a train ticket and can't afford to pay to ship your equipment. This means you have to gather supplies once you arrive in Fort Point. It will take 2 days for you to arrive in Fort Point." ],
     "correctUniqueWords": [ "take", "board", "embark", "catch", "train", "locomotive", "engine", "iron horse" ],
-    "dangerUniqueWords": [ "horse", "ride", "mare", "stallion", "colt", "filly", "bronco", "mustang", "pony", "steed", "climb on", "mount" ],
+    "dangerUniqueWords": [ "horse", "mare", "stallion", "colt", "filly", "bronco", "mustang", "pony", "steed", "climb on", "mount" ],
     "danger": "Good thinking! You decide taking your equipment is important. However, time is valuable. Unfortunately, the ride is too long and your cousin has taken a turn for the worse. Asher has passed away. Game Over.",
     "correctChoice": "You decide to buy a train ticket and are now on your way to Fort Point. Safe travels!"
   },
@@ -47,7 +47,7 @@
     "correctUniqueWords": [ "ride", "town", "hitch", "drive", "lift", "pick up", "carriage", "cab", "hitchhike", "thumb", "burn a ride" ],
     "dangerUniqueWords": [ "walk", "stroll", "march", "gait", "ambulate", "saunter", "stride", "traipse", "tramp", "tread", "advance", "go on", "maintain", "forge ahead", "get on", "keep at", "keep on", "persist", "push on" ],
     "danger": "You hear horse hooves but it is too dark to tell which direction they're coming from. CRASH! Tragically, you are run over by a stage coach speeding down the dark curvy road. Game Over.",
-    "correctChoice": "In order to save time, you chose to hitch a ride back to town on a stagecoach. Unbeknownst to you, the coach was highjacked by a wanted outlaw.  Upon arriving back in town, you were captured by the sheriff and immediately thrown in jail"
+    "correctChoice": "In order to save time, you chose to hitch a ride back to town on a stagecoach. Unbeknownst to you, the coach was highjacked by a wanted outlaw.  Upon arriving back in town, you were captured by the sheriff and immediately thrown in jail."
   },
   {
     "name": "Fort Point Jailhouse\n\n",
