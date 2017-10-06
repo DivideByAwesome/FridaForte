@@ -45,7 +45,7 @@
     "choices": [ "Continue walking", "Hitch a ride to town" ],
     "choiceContext": [ null, null ],
     "correctUniqueWords": [ "ride", "town", "hitch", "drive", "lift", "pick up", "carriage", "cab" ],
-    "incorrectUniqueWords": [ "walk", "stroll", "march", "gait", "ambulate", "saunter", "stride", "traipse", "tramp", "tread", "advance", "go on", "maintain", "forge ahead", "get on", "keep at", "keep on", "persist", "push on" ],
+    "dangerUniqueWords": [ "walk", "stroll", "march", "gait", "ambulate", "saunter", "stride", "traipse", "tramp", "tread", "advance", "go on", "maintain", "forge ahead", "get on", "keep at", "keep on", "persist", "push on" ],
     "danger": "You hear horse hooves but it is too dark to tell which direction they're coming from. CRASH! Tragically, you are run over by a stage coach speeding down the dark curvy road. Game Over.",
     "correctChoice": "In order to save time, you chose to hitch a ride back to town on a stagecoach. Unbeknownst to you, the coach was highjacked by a wanted outlaw.  Upon arriving back in town, you were captured by the sheriff and immediately thrown in jail"
   },
