@@ -13,17 +13,19 @@ namespace FridaForte
         public string Message { get; }
         public string[] ChoiceContext;
         public string[] Choices;
-        public string[] UniqueWords;
+        public string[] CorrectUniqueWords { get; }
+        public string[] DangerUniqueWords { get; }
         public string Danger { get; }
         public string CorrectChoice { get; }
 
-        public Location(string name, string message, string[] choiceContext, string[] choices, string correctChoice, string danger, string[] uniqueWords)
+        public Location(string name, string message, string[] choiceContext, string[] choices, string correctChoice, string danger, string[] correctUniqueWords, string[] dangerUniqueWords)
         {
             Name = name;
             Message = message;
             ChoiceContext = choiceContext;
             Choices = choices;
-            UniqueWords = uniqueWords;
+            CorrectUniqueWords = correctUniqueWords;
+            DangerUniqueWords = dangerUniqueWords;
             Danger = danger;
             CorrectChoice = correctChoice;
         }

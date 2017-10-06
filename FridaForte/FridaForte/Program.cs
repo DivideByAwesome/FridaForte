@@ -23,7 +23,7 @@ namespace FridaForte
         private static void ShowAuthors()
         {
             WriteLine("\nBrought to you by the A-Team:\n");
-            WriteLine("Scrum Master/Team Lead: Sara Jade https://www.linkedin.com/in/sara-jade/");
+            WriteLine("Scrum Master/Fearless Leader: Sara Jade https://www.linkedin.com/in/sara-jade/");
             WriteLine("Super Coding Diva: Sugey Valencia https://www.linkedin.com/in/sugey-valencia-955667140/");
             WriteLine("Rockin' Feature Developer: Roscoe Bass III https://www.linkedin.com/in/roscoebass/");
             WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
@@ -57,20 +57,21 @@ namespace FridaForte
             {
                 location.ShowChoices();
                 input = GetInput("\nEnter your decision: ");
-                isWrongChoice = input.Contains(location.UniqueWords[0].ToLower());
-                isCorrectChoice = input.Contains(location.UniqueWords[1].ToLower());
+                isWrongChoice = location.DangerUniqueWords.Contains(input.ToLower());
+                isCorrectChoice = location.CorrectUniqueWords.Contains(input.ToLower());
 
-                if (isWrongChoice)
+                if (isWrongChoice && !isCorrectChoice)
                 {
                     Typer(WordWrapper($"\n{location.Danger}"));
                     canContinue = false;
                 }
-                else if (isCorrectChoice)
+                else if (isCorrectChoice && !isWrongChoice)
                 {
                     Typer(WordWrapper($"\n{location.CorrectChoice}"));
                     canContinue = true;
                 }
-                else // user inputs neither danger choice nor correct choice
+                else // user inputs neither danger choice nor correct choice,
+                     // or user inputs both correct and danger
                 {
                     WriteLine("************************");
                     ForegroundColor = ConsoleColor.Red;
@@ -80,9 +81,9 @@ namespace FridaForte
                     WriteLine("************************");
                     Typer("Please try again.");
                 }
-            } while (!(isWrongChoice || isCorrectChoice));
+            } while (!(isWrongChoice || isCorrectChoice) || (isWrongChoice && isCorrectChoice));
 
-            ReadLine();
+            ReadKey();
             Clear();
 
             return canContinue;

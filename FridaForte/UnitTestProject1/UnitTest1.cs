@@ -24,8 +24,11 @@ namespace UnitTestProject1
                 "Pharmacy",
                 "Leaving the pharmacy....",
                  new string[] { "Open the door!","close door" },
-                 new string[] { "Open", "Close" }, "correct", "dead",
-                 new string[] { "stay", "help" });
+                 new string[] { "Open", "Close" }, 
+                 "correct", 
+                 "dead",
+                 new string[] { "go", "help" },
+                 new string[] { "stay", "remain" });
 
             Assert.IsInstanceOfType(pharmacy, typeof(Location));
             Assert.AreEqual("Pharmacy", pharmacy.Name);
@@ -63,7 +66,8 @@ namespace UnitTestProject1
             Location[] actuals = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(actual));
 
             Assert.IsInstanceOfType(actuals[0], typeof(Location));
-            Assert.IsInstanceOfType(actuals[0].UniqueWords, typeof(Array));
+            Assert.IsInstanceOfType(actuals[0].CorrectUniqueWords, typeof(Array));
+            Assert.IsInstanceOfType(actuals[0].DangerUniqueWords, typeof(Array));
             Assert.IsNotNull(actuals);
             Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
@@ -74,11 +78,13 @@ namespace UnitTestProject1
             Location location = new Location(
                 "Pharmacy",
                 "Leaving the pharmacy....",
-                 new string[] { "Open the door!" },
-                 new string[] { "open", "close" }, 
+                 new string[] { "Open the door!", "close door" },
+                 new string[] { "Open", "Close" },
                  "correct",
                  "dead",
-                 new string[] { "stay", "help" });
+                 new string[] { "go", "help" },
+                 new string[] { "stay", "remain" });
+
             string expected1 = "open";
             bool isWrongChoice = expected1.Contains(location.Choices[0].ToLower());
             string expected2 = "close";
@@ -93,17 +99,23 @@ namespace UnitTestProject1
         public void TestRunGame()
         {
             Location pharmacy = new Location(
-               "Pharmacy",
-               "Leaving the pharmacy....",
-               new string[] { "Open the door!" },
-               new string[] { "Open", "Close" }, "correct", "dead",
-               new string[] { "stay", "help" });
+                "Pharmacy",
+                "Leaving the pharmacy....",
+                 new string[] { "Open the door!", "close door" },
+                 new string[] { "Open", "Close" },
+                 "correct",
+                 "dead",
+                 new string[] { "go", "help" },
+                 new string[] { "stay", "remain" });
             Location meadow = new Location(
                "Meadow",
                "Leaving the meadow....",
                new string[] { "Open the door!" },
-               new string[] { "leave", "stay" }, "correct", "dead",
-               new string[] { "stay", "help" });
+               new string[] { "leave", "stay" }, 
+               "correct", 
+               "dead",
+               new string[] { "go", "help" },
+               new string[] { "stay", "remain" });
 
             Location[] locations = { pharmacy, meadow };
 
