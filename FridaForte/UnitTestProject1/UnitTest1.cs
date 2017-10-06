@@ -79,7 +79,7 @@ namespace UnitTestProject1
                 "Pharmacy",
                 "Leaving the pharmacy....",
                  new string[] { "Open the door!", "close door" },
-                 new string[] { "Open", "Close" },
+                 new string[] { "open", "close" },
                  "correct",
                  "dead",
                  new string[] { "go", "help" },
