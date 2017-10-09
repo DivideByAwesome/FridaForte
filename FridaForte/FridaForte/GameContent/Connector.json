@@ -1,0 +1,12 @@
+﻿[
+  {
+    "name": "Fort Point\n\n",
+    "message": "Two days have passed. You step off the train in Fort Point.  Since you don't have any supplies or equipment, you need to go foraging to gather the medicinal herbs needed to help Asher.  You speak to the locals to figure out the lay of the land. After several interviews, you deduce that there are two good foraging spots near town:",
+    "choices": [ "Go to the Forest", "Go to the Meadow" ],
+    "choiceContext": [ "An array (get it?!?) of medicinal splendor in the form of wondrous fungi and barks.", "Many medicinal fruits and herbs can be harvested here." ],
+    "correctUniqueWords": [ "meadow", "field", "grassland", "pasture", "plain", "prarie" ],
+    "dangerUniqueWords": [ "forest", "woods", "wood", "woodland", "grove", "stand", "timberland" ],
+    "danger": "You know that old saying, \"If a tree falls in the forest,make a sound?\" This tree did; you are dead. Game Over.",
+    "correctChoice": "It takes you an hour to walk to the meadows. You arrive in the mid-afternoon."
+  }
+]
