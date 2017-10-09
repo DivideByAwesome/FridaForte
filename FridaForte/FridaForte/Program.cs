@@ -43,7 +43,7 @@ namespace FridaForte
                 Typer("Location: " + location.Name);
                 ResetColor();
                 Typer(WordWrapper(location.Message));
-                canContinue = CanContinue(location, canContinue);
+                canContinue = CanContinue(location, canContinue, gameWorld);
             }
             ShowAuthors();
             Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
@@ -60,11 +60,12 @@ namespace FridaForte
             return gameWorld;
         }
 
-        private static bool CanContinue(Location location, bool canContinue)
+        public static bool CanContinue(Location location, bool canContinue, GameWorld gameWorld)
         {
             string input = string.Empty;
             bool isWrongChoice = false;
             bool isCorrectChoice = false;
+            bool hasOtherLocationCorrectWord = false;
 
             do
             {
@@ -77,6 +78,7 @@ namespace FridaForte
 
                 isCorrectChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
                 isWrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
+                hasOtherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
 
                 if (isWrongChoice && !isCorrectChoice)
                 {
@@ -112,7 +114,7 @@ namespace FridaForte
             return canContinue;
         }
 
-        public static bool IsFoundUniqueWords(string[] uniqueWords, string[] words)
+        public static bool IsFoundUniqueWords(IEnumerable<string> uniqueWords, string[] words)
         {
             for (int i = 0; i < words.Length; ++i)
             {

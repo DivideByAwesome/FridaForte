@@ -73,29 +73,24 @@ namespace UnitTestProject1
             Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
 
-        [TestMethod]
-        public void TestProgramCanContinue()
-        {
-            Location location = new Location(
-                "Pharmacy",
-                "Leaving the pharmacy....",
-                 new string[] { "Open the door!", "close door" },
-                 new string[] { "open", "close" },
-                 "correct",
-                 "dead",
-                 new string[] { "go", "help" },
-                 new string[] { "stay", "remain" });
+        // *** This method requires user input
+        // How do we test a method with user input?
+        //[TestMethod]
+        //public void TestProgramCanContinue()
+        //{
+        //    Location location = new Location(
+        //        "Pharmacy",
+        //        "Leaving the pharmacy....",
+        //         new string[] { "Open the door!", "close door" },
+        //         new string[] { "open", "close" },
+        //         "correct",
+        //         "dead",
+        //         new string[] { "go", "help" },
+        //         new string[] { "stay", "remain" });
 
-            string expected1 = "open";
-            bool isWrongChoice = expected1.Contains(location.Choices[0].ToLower());
-            string expected2 = "close";
-            bool isCorrectChoice = expected2.Contains(location.Choices[1].ToLower());
+        //    Assert.IsTrue(Program.CanContinue(location, true));
+        //}
 
-            Assert.AreEqual(expected1, location.Choices[0]);
-            Assert.AreEqual(expected2, location.Choices[1]);
-            Assert.IsTrue(isWrongChoice);
-            Assert.IsTrue(isCorrectChoice);
-        }
         [TestMethod]
         public void TestRunGame()
         {
