@@ -30,7 +30,64 @@ namespace FridaForte
         //Start Game
         private static void RunGame()
         {
-            Location[] locations = GetContent();
+            Location[] locations = GetContent("BasePath");
+            LocationIterator(locations);
+
+            locations = GetContent("Connector");
+            //LocationIterator(locations);
+
+            locations = GetPath(locations);
+            Clear();
+            LocationIterator(locations);
+            locations = GetContent("Ending");
+            LocationIterator(locations);
+            Clear();
+            ResetGame();
+        }
+
+        public static Location[] GetPath(Location[] locations)
+        {
+            BackgroundColor = ConsoleColor.DarkMagenta;
+            Typer("Location: " + locations[0].Name);
+            ResetColor();
+            Typer(WordWrapper(locations[0].Message));
+            locations[0].ShowChoices();
+            string input = GetInput("\nEnter your decision: ");
+            char[] seperatorChars = { ' ', ',' };
+            string[] words = input.Split(seperatorChars); // turns player's input into an array
+            Location[] path = { };
+
+            bool isPath1 = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
+            bool isPath2 = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
+
+            do
+            {
+                if (isPath1 && !isPath2)
+                {
+                    path = GetContent("PathOne");
+                }
+                else if (isPath2 && !isPath1)
+                {
+                    path = GetContent("PathTwo");
+                }
+                else
+                {
+                    WriteLine("************************");
+                    ForegroundColor = ConsoleColor.Red;
+                    Typer($"You entered: {input}");
+                    ResetColor();
+                    Typer("I don't understand that command.");
+                    WriteLine("************************");
+                    Typer("Please try again.");
+                }
+            } while (!(isPath1 || isPath2) || (isPath1 && isPath2));
+
+
+            return path;
+        }
+
+        public static void LocationIterator(Location[] locations)
+        {
             Location location;
             bool canContinue = true;
 
@@ -43,12 +100,10 @@ namespace FridaForte
                 Typer(WordWrapper(location.Message));
                 canContinue = CanContinue(location, canContinue);
             }
-            ShowAuthors();
-            Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
         }
-
         private static bool CanContinue(Location location, bool canContinue)
         {
+            Player player = new Player();
             string input = string.Empty;
             bool isWrongChoice = false;
             bool isCorrectChoice = false;
@@ -59,6 +114,7 @@ namespace FridaForte
                 input = GetInput("\nEnter your decision: ");
                 // add method to make input into an array to check in each Choice array for matches
                 // splits input into array of words
+                player.CurrentInput = input;
                 char[] seperatorChars = { ' ', ',' };
                 string[] words = input.Split(seperatorChars);
 
@@ -109,11 +165,11 @@ namespace FridaForte
             return false;
         }
 
-        public static Location[] GetContent()
+        public static Location[] GetContent(string gameContent)
         {
             string path = Directory.GetCurrentDirectory();
 
-            string jsonFile = path + "../../../GameContent.json";
+            string jsonFile = $"{path}../../../GameContent/{gameContent}.json";
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
 
             return locations;
@@ -138,7 +194,7 @@ namespace FridaForte
         }
 
         //Word wrapper
-        internal static string WordWrapper(string paragraph)
+        public static string WordWrapper(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
@@ -174,7 +230,7 @@ namespace FridaForte
 
         public static void ResetGame()
         {
-            Typer("\nPlay again, Yes or No: ");
+            Typer("\nWould you like to play again, Yes or No: ");
             string input = ReadLine().ToLower();
             if (input == "yes" || input == "y")
             {
@@ -188,7 +244,7 @@ namespace FridaForte
                 ShowAuthors();
                 Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
             }
-            
+
         }
 
         //Typewriter effect
