@@ -85,7 +85,7 @@ namespace UnitTestProject1
                  "dead",
                  new string[] { "go", "help" },
                  new string[] { "stay", "remain" });
-                       
+
             string expected1 = "open";
             bool isWrongChoice = expected1.Contains(location.Choices[0].ToLower());
             string expected2 = "close";
@@ -140,32 +140,11 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestIsFoundUniqueWords()
         {
-            string[] uniqueWords = {"ride", "take", "go"};
+            string[] uniqueWords = { "ride", "take", "go" };
             string[] inputWords = { "ride", "take", "go" };
             string[] inputWords2 = { "hop", "grap", "stay" };
-            bool actual = false;
-            bool actual2 = false;
-            for (int i = 0; i < inputWords.Length; ++i)
-            {
-                if (uniqueWords.Contains(inputWords[i].ToLower()))
-                {
-                    actual = true;
-                }
-            }
-            for (int i = 0; i < inputWords2.Length; ++i)
-            {
-                if (uniqueWords.Contains(inputWords2[i].ToLower()))
-                {
-                    actual2 = true;
-                }
-            }
-
-
-            Assert.AreEqual(true, actual);
-            Assert.AreEqual(false, actual2);
-
-
-
-        } // End class UnitTest1
+            Assert.IsTrue(Program.IsFoundUniqueWords(uniqueWords, inputWords));
+            Assert.IsFalse(Program.IsFoundUniqueWords(uniqueWords, inputWords2));
+        } 
     }
 }
