@@ -26,7 +26,7 @@
     "choiceContext": [ "An array (get it?!?) of medicinal splendor in the form of wondrous fungi and barks.", "Many medicinal fruits and herbs can be harvested here." ],
     "correctUniqueWords": [ "meadow", "field", "grassland", "pasture", "plain", "prarie" ],
     "dangerUniqueWords": [ "forest", "woods", "wood", "woodland", "grove", "stand", "timberland" ],
-    "danger": "You know that old saying, \"If a tree falls in the forest,make a sound?\" This tree did; you are dead. Game Over.",
+    "danger": "You know that old saying, \"If a tree falls in the forest, does it make a sound?\" This tree did; you are dead. Game Over.",
     "correctChoice": "It takes you an hour to walk to the meadows. You arrive in the mid-afternoon."
   },
   {
