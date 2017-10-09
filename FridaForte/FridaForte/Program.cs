@@ -44,6 +44,7 @@ namespace FridaForte
                 canContinue = CanContinue(location, canContinue);
             }
             ShowAuthors();
+            //play again code goes here
             Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
         }
 
@@ -69,10 +70,12 @@ namespace FridaForte
                 {
                     Typer(WordWrapper($"\n{location.Danger}"));
                     canContinue = false;
+                    ResetGame();
                 }
                 else if (isCorrectChoice && !isWrongChoice)
                 {
                     Typer(WordWrapper($"\n{location.CorrectChoice}"));
+                    Typer("\nPress any key to continue...");
                     canContinue = true;
                 }
                 else // user inputs neither danger choice nor correct choice,
@@ -125,6 +128,7 @@ namespace FridaForte
             Typer("************************************************");
             Typer("\nWelcome Player!");
             Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
+            Typer("\nPress any key to continue...");
             ReadKey();
             Clear();
         }
@@ -169,8 +173,27 @@ namespace FridaForte
             return lines.ToString();
         }
 
+        public static void ResetGame()
+        {
+            Typer("\nPlay again, Yes or No: ");
+            string input = ReadLine().ToLower();
+            if (input == "yes" || input == "y")
+            {
+                Clear();
+                WelcomePlayer();
+                RunGame();
+            }
+            else
+            {
+                Clear();
+                ShowAuthors();
+                Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
+            }
+            
+        }
+
         //Typewriter effect
-        internal static void Typer(string str)
+        public static void Typer(string str)
         {
             for (int i = 0; i < str.Length; i++)
             {
