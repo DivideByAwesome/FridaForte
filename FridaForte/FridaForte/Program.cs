@@ -44,7 +44,6 @@ namespace FridaForte
                 canContinue = CanContinue(location, canContinue);
             }
             ShowAuthors();
-            //play again code goes here
             Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
         }
 
