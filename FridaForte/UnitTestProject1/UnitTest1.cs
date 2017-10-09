@@ -85,7 +85,7 @@ namespace UnitTestProject1
                  "dead",
                  new string[] { "go", "help" },
                  new string[] { "stay", "remain" });
-
+                       
             string expected1 = "open";
             bool isWrongChoice = expected1.Contains(location.Choices[0].ToLower());
             string expected2 = "close";
