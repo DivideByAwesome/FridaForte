@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static System.Console;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace UnitTestProject1
 {
@@ -134,6 +135,38 @@ namespace UnitTestProject1
 
             Assert.AreEqual(locations.Length - 1, index);
             Assert.AreEqual(false, canContinue);
+        }
+
+        [TestMethod]
+        public void TestInitGameWorld()
+        {
+            Location pharmacy = new Location(
+                "Pharmacy",
+                "Leaving the pharmacy....",
+                 new string[] { "Open the door!", "close door" },
+                 new string[] { "Open", "Close" },
+                 "correct",
+                 "dead",
+                 new string[] { "go", "help" },
+                 new string[] { "stay", "remain" });
+            Location meadow = new Location(
+               "Meadow",
+               "Leaving the meadow....",
+               new string[] { "Open the door!" },
+               new string[] { "leave", "stay" },
+               "correct",
+               "dead",
+               new string[] { "go", "help" },
+               new string[] { "stay", "remain" });
+            Location[] locations = { pharmacy, meadow };
+            GameWorld gameWorld = Program.InitGameWorld(locations);
+
+            Assert.IsInstanceOfType(gameWorld.AllCorrectUniqueWords, typeof(HashSet<string>));
+            Assert.IsTrue(gameWorld.AllCorrectUniqueWords.Contains("go"));
+            Assert.IsTrue(gameWorld.AllCorrectUniqueWords.Contains("help"));
+            Assert.IsInstanceOfType(gameWorld.AllDangerUniqueWords, typeof(HashSet<string>));
+            Assert.IsTrue(gameWorld.AllDangerUniqueWords.Contains("stay"));
+            Assert.IsTrue(gameWorld.AllDangerUniqueWords.Contains("remain"));
         }
     } // End class UnitTest1
 }

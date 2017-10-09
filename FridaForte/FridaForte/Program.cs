@@ -28,11 +28,13 @@ namespace FridaForte
             WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
         }
         //Start Game
-        private static void RunGame()
+        static void RunGame()
         {
             Location[] locations = GetContent();
             Location location;
             bool canContinue = true;
+
+            GameWorld gameWorld = InitGameWorld(locations);
 
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
@@ -45,6 +47,17 @@ namespace FridaForte
             }
             ShowAuthors();
             Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
+        }
+
+        public static GameWorld InitGameWorld(Location[] locations)
+        {
+            GameWorld gameWorld = new GameWorld();
+            foreach (Location loc in locations)
+            {
+                gameWorld.AllCorrectUniqueWords.UnionWith(loc.CorrectUniqueWords);
+                gameWorld.AllDangerUniqueWords.UnionWith(loc.DangerUniqueWords);
+            }
+            return gameWorld;
         }
 
         private static bool CanContinue(Location location, bool canContinue)
@@ -74,6 +87,10 @@ namespace FridaForte
                 {
                     Typer(WordWrapper($"\n{location.CorrectChoice}"));
                     canContinue = true;
+                }
+                else if (isCorrectChoice && isWrongChoice)
+                {
+                    WriteLine("Please be more specific");
                 }
                 else // user inputs neither danger choice nor correct choice,
                      // or user inputs both correct and danger
