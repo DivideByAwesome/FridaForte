@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static System.Console;
 using System.IO;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace UnitTestProject1
 {
@@ -23,9 +24,9 @@ namespace UnitTestProject1
             Location pharmacy = new Location(
                 "Pharmacy",
                 "Leaving the pharmacy....",
-                 new string[] { "Open the door!","close door" },
-                 new string[] { "Open", "Close" }, 
-                 "correct", 
+                 new string[] { "Open the door!", "close door" },
+                 new string[] { "Open", "Close" },
+                 "correct",
                  "dead",
                  new string[] { "go", "help" },
                  new string[] { "stay", "remain" });
@@ -111,8 +112,8 @@ namespace UnitTestProject1
                "Meadow",
                "Leaving the meadow....",
                new string[] { "Open the door!" },
-               new string[] { "leave", "stay" }, 
-               "correct", 
+               new string[] { "leave", "stay" },
+               "correct",
                "dead",
                new string[] { "go", "help" },
                new string[] { "stay", "remain" });
@@ -135,5 +136,36 @@ namespace UnitTestProject1
             Assert.AreEqual(locations.Length - 1, index);
             Assert.AreEqual(false, canContinue);
         }
-    } // End class UnitTest1
+
+        [TestMethod]
+        public void TestIsFoundUniqueWords()
+        {
+            string[] uniqueWords = {"ride", "take", "go"};
+            string[] inputWords = { "ride", "take", "go" };
+            string[] inputWords2 = { "hop", "grap", "stay" };
+            bool actual = false;
+            bool actual2 = false;
+            for (int i = 0; i < inputWords.Length; ++i)
+            {
+                if (uniqueWords.Contains(inputWords[i].ToLower()))
+                {
+                    actual = true;
+                }
+            }
+            for (int i = 0; i < inputWords2.Length; ++i)
+            {
+                if (uniqueWords.Contains(inputWords2[i].ToLower()))
+                {
+                    actual2 = true;
+                }
+            }
+
+
+            Assert.AreEqual(true, actual);
+            Assert.AreEqual(false, actual2);
+
+
+
+        } // End class UnitTest1
+    }
 }
