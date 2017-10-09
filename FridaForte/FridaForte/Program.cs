@@ -66,6 +66,7 @@ namespace FridaForte
             bool isWrongChoice = false;
             bool isCorrectChoice = false;
             bool hasOtherLocationCorrectWord = false;
+            bool hasOtherLocationDangerWord = false;
 
             do
             {
@@ -79,6 +80,7 @@ namespace FridaForte
                 isCorrectChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
                 isWrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
                 hasOtherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
+                hasOtherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
 
                 if (isWrongChoice && !isCorrectChoice)
                 {
@@ -94,8 +96,11 @@ namespace FridaForte
                 {
                     WriteLine("Please be more specific");
                 }
+                else if (!isCorrectChoice && !isWrongChoice && (hasOtherLocationCorrectWord || hasOtherLocationDangerWord))
+                {
+                    WriteLine("That command doesn't apply here");
+                }
                 else // user inputs neither danger choice nor correct choice,
-                     // or user inputs both correct and danger
                 {
                     WriteLine("************************");
                     ForegroundColor = ConsoleColor.Red;
