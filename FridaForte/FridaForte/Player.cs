@@ -10,7 +10,7 @@ namespace FridaForte
     {
         public string FirstName { get; }
         public string LastName { get; }
-        public string CurrentInput { get; }
+        public string CurrentInput { get; set; }
 
         public Player()
         {

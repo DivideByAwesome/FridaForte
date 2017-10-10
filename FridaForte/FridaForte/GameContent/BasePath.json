@@ -1,0 +1,22 @@
+﻿[
+  {
+    "name": "Pharmacy\n\n",
+    "message": "Today, you get a letter from your cousin who lives in Fort Point, California.\n\nLetter:\n\nDearest Cousin Frida,\n\nWith great sadness, I must inform you that I have a fallen ill with dysentery. Our little town of Fort Point does not have a doctor and I am running out of time. I would not ask this of you, but I am in great distress. As you are the only pharmacist I know, I see no better person to help me in my time of need. Would you please come as soon as possible?\n\nYour loving cousin,\nAsher\n\n",
+    "choices": [ "Stay and run shop", "Go help your cousin" ],
+    "choiceContext": [ null, null ],
+    "correctUniqueWords": [ "go", "leave", "move", "travel", "depart", "journey", "split", "vamoose", "get going", "hit the road", "help", "assist", "aid", "cousin", "family", "relative" ],
+    "dangerUniqueWords": [ "stay", "remain", "linger", "wait", "delay", "halt", "sit tight", "stick around", "run", "shop", "pharmacy", "store", "drugstore", "apothecary", "dispensary" ],
+    "danger": "You decided to ignore your cousin's request, and stay to run your pharmacy. Unfortunately, after a couple weeks you get another letter informing you that your cousin has passed away.  Game Over.",
+    "correctChoice": "You have chosen to help your cousin. You quickly close up shop and head home."
+  },
+  {
+    "name": "Home\n\n",
+    "message": "You arrive at your home and begin packing for your trip. As you pack you weigh your options for transportation.",
+    "choices": [ "Ride horse", "Take train" ],
+    "choiceContext": [ "You can take your trusty steed which would allow you to bring all your equipment. It will take a week for you to arrive in Fort Point.", "You have just enough money to buy a train ticket and can't afford to pay to ship your equipment. This means you have to gather supplies once you arrive in Fort Point. It will take 2 days for you to arrive in Fort Point." ],
+    "correctUniqueWords": [ "take", "board", "embark", "catch", "train", "locomotive", "engine", "iron horse" ],
+    "dangerUniqueWords": [ "horse", "mare", "stallion", "colt", "filly", "bronco", "mustang", "pony", "steed", "climb on", "mount" ],
+    "danger": "Good thinking! You decide taking your equipment is important. However, time is valuable. Unfortunately, the ride is too long and your cousin has taken a turn for the worse. Asher has passed away. Game Over.",
+    "correctChoice": "You decide to buy a train ticket and are now on your way to Fort Point. Safe travels!"
+  }
+]
