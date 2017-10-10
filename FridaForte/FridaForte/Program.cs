@@ -57,13 +57,29 @@ namespace FridaForte
             char[] seperatorChars = { ' ', ',' };
             string[] words;
             Location[] path = { };
+            GameWorld gameWorld = InitGameWorld(GetContent("GameContent"));
+
+            bool isWrongChoice = false;
+            bool isCorrectChoice = false;
+
+            bool hasOtherLocationCorrectWord = false;
+            bool hasOtherLocationDangerWord = false;
+
             bool isPath1;
             bool isPath2;
+
 
             do
             {
                 input = GetInput("\nEnter your decision: ");
                 words = input.Split(seperatorChars);
+
+                hasOtherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
+                hasOtherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
+
+                isCorrectChoice = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
+                isWrongChoice = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
+
                 isPath1 = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
                 isPath2 = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
 
@@ -75,15 +91,17 @@ namespace FridaForte
                 {
                     path = GetContent("PathTwo");
                 }
-                else
+                else if (isCorrectChoice && isWrongChoice)
                 {
-                    WriteLine("************************");
-                    ForegroundColor = ConsoleColor.Red;
-                    Typer($"You entered: {input}");
-                    ResetColor();
-                    Typer("I don't understand that command.");
-                    WriteLine("************************");
-                    Typer("Please try again.");
+                    DisplayError(input, "Please be more specific");
+                }
+                else if (!isCorrectChoice && !isWrongChoice && (hasOtherLocationCorrectWord || hasOtherLocationDangerWord))
+                {
+                    DisplayError(input, "That command doesn't apply here");
+                }
+                else // user inputs neither danger choice nor correct choice,
+                {
+                    DisplayError(input, "I don't understand that command.");
                 }
 
             } while (!(isPath1 || isPath2) || (isPath1 && isPath2));
@@ -285,7 +303,7 @@ namespace FridaForte
             for (int i = 0; i < str.Length; i++)
             {
                 Write(str[i]);
-                System.Threading.Thread.Sleep(1);
+                Thread.Sleep(1);
             }
             WriteLine();
         }
