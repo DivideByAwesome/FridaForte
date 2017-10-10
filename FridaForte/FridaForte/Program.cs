@@ -28,68 +28,13 @@ namespace FridaForte
             WriteLine("Awesome UX Dev: Alem Asefa https://www.linkedin.com/in/alemneh/");
         }
         //Start Game
-        private static void RunGame()
+        static void RunGame()
         {
-            Location[] locations = GetContent("BasePath");
-            LocationIterator(locations);
-
-            locations = GetContent("Connector");
-            //LocationIterator(locations);
-
-            locations = GetPath(locations);
-            Clear();
-            LocationIterator(locations);
-            locations = GetContent("Ending");
-            LocationIterator(locations);
-            Clear();
-            ResetGame();
-        }
-
-        public static Location[] GetPath(Location[] locations)
-        {
-            BackgroundColor = ConsoleColor.DarkMagenta;
-            Typer("Location: " + locations[0].Name);
-            ResetColor();
-            Typer(WordWrapper(locations[0].Message));
-            locations[0].ShowChoices();
-            string input = GetInput("\nEnter your decision: ");
-            char[] seperatorChars = { ' ', ',' };
-            string[] words = input.Split(seperatorChars); // turns player's input into an array
-            Location[] path = { };
-
-            bool isPath1 = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
-            bool isPath2 = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
-
-            do
-            {
-                if (isPath1 && !isPath2)
-                {
-                    path = GetContent("PathOne");
-                }
-                else if (isPath2 && !isPath1)
-                {
-                    path = GetContent("PathTwo");
-                }
-                else
-                {
-                    WriteLine("************************");
-                    ForegroundColor = ConsoleColor.Red;
-                    Typer($"You entered: {input}");
-                    ResetColor();
-                    Typer("I don't understand that command.");
-                    WriteLine("************************");
-                    Typer("Please try again.");
-                }
-            } while (!(isPath1 || isPath2) || (isPath1 && isPath2));
-
-
-            return path;
-        }
-
-        public static void LocationIterator(Location[] locations)
-        {
+            Location[] locations = GetContent();
             Location location;
             bool canContinue = true;
+
+            GameWorld gameWorld = InitGameWorld(locations);
 
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
@@ -98,15 +43,30 @@ namespace FridaForte
                 Typer("Location: " + location.Name);
                 ResetColor();
                 Typer(WordWrapper(location.Message));
-                canContinue = CanContinue(location, canContinue);
+                canContinue = CanContinue(location, canContinue, gameWorld);
             }
+            ShowAuthors();
+            Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
         }
-        private static bool CanContinue(Location location, bool canContinue)
+
+        public static GameWorld InitGameWorld(Location[] locations)
         {
-            Player player = new Player();
+            GameWorld gameWorld = new GameWorld();
+            foreach (Location loc in locations)
+            {
+                gameWorld.AllCorrectUniqueWords.UnionWith(loc.CorrectUniqueWords);
+                gameWorld.AllDangerUniqueWords.UnionWith(loc.DangerUniqueWords);
+            }
+            return gameWorld;
+        }
+
+        public static bool CanContinue(Location location, bool canContinue, GameWorld gameWorld)
+        {
             string input = string.Empty;
             bool isWrongChoice = false;
             bool isCorrectChoice = false;
+            bool hasOtherLocationCorrectWord = false;
+            bool hasOtherLocationDangerWord = false;
 
             do
             {
@@ -114,27 +74,33 @@ namespace FridaForte
                 input = GetInput("\nEnter your decision: ");
                 // add method to make input into an array to check in each Choice array for matches
                 // splits input into array of words
-                player.CurrentInput = input;
                 char[] seperatorChars = { ' ', ',' };
                 string[] words = input.Split(seperatorChars);
 
                 isCorrectChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
                 isWrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
+                hasOtherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
+                hasOtherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
 
                 if (isWrongChoice && !isCorrectChoice)
                 {
                     Typer(WordWrapper($"\n{location.Danger}"));
                     canContinue = false;
-                    ResetGame();
                 }
                 else if (isCorrectChoice && !isWrongChoice)
                 {
                     Typer(WordWrapper($"\n{location.CorrectChoice}"));
-                    Typer("\nPress any key to continue...");
                     canContinue = true;
                 }
+                else if (isCorrectChoice && isWrongChoice)
+                {
+                    WriteLine("Please be more specific");
+                }
+                else if (!isCorrectChoice && !isWrongChoice && (hasOtherLocationCorrectWord || hasOtherLocationDangerWord))
+                {
+                    WriteLine("That command doesn't apply here");
+                }
                 else // user inputs neither danger choice nor correct choice,
-                     // or user inputs both correct and danger
                 {
                     WriteLine("************************");
                     ForegroundColor = ConsoleColor.Red;
@@ -153,7 +119,7 @@ namespace FridaForte
             return canContinue;
         }
 
-        public static bool IsFoundUniqueWords(string[] uniqueWords, string[] words)
+        public static bool IsFoundUniqueWords(IEnumerable<string> uniqueWords, string[] words)
         {
             for (int i = 0; i < words.Length; ++i)
             {
@@ -165,11 +131,11 @@ namespace FridaForte
             return false;
         }
 
-        public static Location[] GetContent(string gameContent)
+        public static Location[] GetContent()
         {
             string path = Directory.GetCurrentDirectory();
 
-            string jsonFile = $"{path}../../../GameContent/{gameContent}.json";
+            string jsonFile = path + "../../../GameContent.json";
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
 
             return locations;
@@ -183,7 +149,6 @@ namespace FridaForte
             Typer("************************************************");
             Typer("\nWelcome Player!");
             Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
-            Typer("\nPress any key to continue...");
             ReadKey();
             Clear();
         }
@@ -194,7 +159,7 @@ namespace FridaForte
         }
 
         //Word wrapper
-        public static string WordWrapper(string paragraph)
+        internal static string WordWrapper(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
@@ -228,27 +193,8 @@ namespace FridaForte
             return lines.ToString();
         }
 
-        public static void ResetGame()
-        {
-            Typer("\nWould you like to play again, Yes or No: ");
-            string input = ReadLine().ToLower();
-            if (input == "yes" || input == "y")
-            {
-                Clear();
-                WelcomePlayer();
-                RunGame();
-            }
-            else
-            {
-                Clear();
-                ShowAuthors();
-                Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
-            }
-
-        }
-
         //Typewriter effect
-        public static void Typer(string str)
+        internal static void Typer(string str)
         {
             for (int i = 0; i < str.Length; i++)
             {
