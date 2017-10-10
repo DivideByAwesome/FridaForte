@@ -59,14 +59,14 @@ namespace FridaForte
             Location[] path = { };
             GameWorld gameWorld = InitGameWorld(GetContent("GameContent"));
 
-            bool isWrongChoice = false;
-            bool isCorrectChoice = false;
+            int wrongChoice = 0;
+            int correctChoice = 0;
 
-            bool hasOtherLocationCorrectWord = false;
-            bool hasOtherLocationDangerWord = false;
+            int otherLocationCorrectWord = 0;
+            int otherLocationDangerWord = 0;
 
-            bool isPath1;
-            bool isPath2;
+            int path1;
+            int path2;
 
 
             do
@@ -74,28 +74,28 @@ namespace FridaForte
                 input = GetInput("\nEnter your decision: ");
                 words = input.Split(seperatorChars);
 
-                hasOtherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
-                hasOtherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
+                otherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
+                otherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
 
-                isCorrectChoice = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
-                isWrongChoice = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
+                correctChoice = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
+                wrongChoice = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
 
-                isPath1 = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
-                isPath2 = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
+                path1 = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
+                path2 = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
 
-                if (isPath1 && !isPath2)
+                if (path1 > path2)
                 {
                     path = GetContent("PathOne");
                 }
-                else if (isPath2 && !isPath1)
+                else if (path2 > path1)
                 {
                     path = GetContent("PathTwo");
                 }
-                else if (isCorrectChoice && isWrongChoice)
+                else if (correctChoice == wrongChoice)
                 {
                     DisplayError(input, "Please be more specific");
                 }
-                else if (!isCorrectChoice && !isWrongChoice && (hasOtherLocationCorrectWord || hasOtherLocationDangerWord))
+                else if (otherLocationCorrectWord > 0 || otherLocationDangerWord > 0)
                 {
                     DisplayError(input, "That command doesn't apply here");
                 }
@@ -104,7 +104,7 @@ namespace FridaForte
                     DisplayError(input, "I don't understand that command.");
                 }
 
-            } while (!(isPath1 || isPath2) || (isPath1 && isPath2));
+            } while (path1 < 1 &&  path2 < 1);
 
             return path;
             //canContinue = CanContinue(location, canContinue, gameWorld);
@@ -141,10 +141,10 @@ namespace FridaForte
         public static bool CanContinue(Location location, bool canContinue, GameWorld gameWorld)
         {
             string input = string.Empty;
-            bool isWrongChoice = false;
-            bool isCorrectChoice = false;
-            bool hasOtherLocationCorrectWord = false;
-            bool hasOtherLocationDangerWord = false;
+            int wrongChoice = 0;
+            int correctChoice = 0;
+            int otherLocationCorrectWord = 0;
+            int otherLocationDangerWord = 0;
 
             do
             {
@@ -155,37 +155,37 @@ namespace FridaForte
                 char[] seperatorChars = { ' ', ',' };
                 string[] words = input.Split(seperatorChars);
 
-                isCorrectChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
-                isWrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
-                hasOtherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
-                hasOtherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
+                correctChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
+                wrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
+                otherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
+                otherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
 
-                if (isWrongChoice && !isCorrectChoice)
+                if (wrongChoice > correctChoice)
                 {
                     Typer(WordWrapper($"\n{location.Danger}"));
                     canContinue = false;
                     ResetGame();
                 }
-                else if (isCorrectChoice && !isWrongChoice)
+                else if (correctChoice > wrongChoice)
                 {
                     Typer(WordWrapper($"\n{location.CorrectChoice}"));
                     Typer("\nPress any key to continue...");
                     canContinue = true;
                 }
-                else if (isCorrectChoice && isWrongChoice)
+                else if (correctChoice == wrongChoice && correctChoice > 0)
                 {
                     DisplayError(input, "Please be more specific");
                 }
-                else if (!isCorrectChoice && !isWrongChoice && (hasOtherLocationCorrectWord || hasOtherLocationDangerWord))
+                else if (otherLocationCorrectWord > 0 || otherLocationDangerWord > 0)
                 {
                     DisplayError(input, "That command doesn't apply here");
                 }
-                else // user inputs neither danger choice nor correct choice,
+                else // user inputs neither danger choice nor correct choice nor other location word 
                 {
                     DisplayError(input, "I don't understand that command.");
                 }
 
-            } while (!(isWrongChoice || isCorrectChoice) || (isWrongChoice && isCorrectChoice));
+            } while (wrongChoice < 1 && correctChoice < 1);
 
             ReadKey();
             Clear();
@@ -204,16 +204,17 @@ namespace FridaForte
             Typer("Please try again.");
         }
 
-        public static bool IsFoundUniqueWords(IEnumerable<string> uniqueWords, string[] words)
+        public static int IsFoundUniqueWords(IEnumerable<string> uniqueWords, string[] words)
         {
+            int counter = 0;
             for (int i = 0; i < words.Length; ++i)
             {
                 if (uniqueWords.Contains(words[i].ToLower()))
                 {
-                    return true;
-                }
+                    ++counter;
+                }//Else keep looping
             }
-            return false;
+            return counter;
         }
 
         public static Location[] GetContent(string gameContent)
