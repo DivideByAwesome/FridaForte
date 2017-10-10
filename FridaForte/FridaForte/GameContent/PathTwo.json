@@ -4,8 +4,8 @@
     "message": "\n\nYou are in the forest. The forest is a bountiful buffet of medicinal plants. You look around and narrow down your choices. Which should you choose?",
     "choices": [ "Pick mushrooms", "Gather pine needles" ],
     "choiceContext": [ null, null ],
-    "correctUniqueWords": [ "pine", "conifer", "evergreen", "needles", "leaves" ],
-    "dangerUniqueWords": [ "mushroom", "mushrooms", "shroom", "shrooms", "mush", "mushies", "fungus", "fungi", "toadstool", "toadstools" ],
+    "correctUniqueWords": [ "gather", "pine", "conifer", "evergreen", "needles", "leaves" ],
+    "dangerUniqueWords": [ "gather", "mushroom", "mushrooms", "shroom", "shrooms", "mush", "mushies", "fungus", "fungi", "toadstool", "toadstools" ],
     "danger": "You decided to pick a handful of mushrooms, not realizing that they were poisonous. In fact, the poisin is so strong, your skin absorbs enough to kill you. Game Over.",
     "correctChoice": "You strip a small tree of its pine needles. As the sun sets, you head toward Asher's house."
   },
