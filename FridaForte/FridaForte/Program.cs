@@ -229,13 +229,8 @@ namespace FridaForte
         private static void WelcomePlayer()
         {
             Player player = new Player();
-            Typer("************************************************\n");
-            Typer($"{player.FirstName} {player.LastName} Pharmacist Extraordinaire\n");
-            Typer("************************************************");
-            Typer("\nWelcome Player!");
-            Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
-            Typer("\nPress any key to continue...");
-            ReadKey();
+            Typer($"************************************************\n\n{player.FirstName} {player.LastName} Pharmacist Extraordinaire\n\n************************************************\n\nWelcome Player!\n\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.\n\nPress enter to continue.");
+            string input = ReadLine();
             Clear();
         }
 
@@ -300,10 +295,17 @@ namespace FridaForte
         //Typewriter effect
         internal static void Typer(string str)
         {
+            int speed = 9;
+
             for (int i = 0; i < str.Length; i++)
             {
                 Write(str[i]);
-                Thread.Sleep(1);
+                Thread.Sleep(speed);
+                if (KeyAvailable)
+                {
+                    speed = 0;
+                    Thread.Sleep(speed);
+                }
             }
             WriteLine();
         }
