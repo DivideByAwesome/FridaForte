@@ -4,8 +4,8 @@
     "message": "\n\nYou are in the forest.",
     "choices": [ "Pick mushrooms", "Gather pine needles" ],
     "choiceContext": [ null, null ],
-    "correctUniqueWords": [ "pine", "conifer", "evergreen", "needles", "leaves" ],
-    "dangerUniqueWords": [ "mushroom", "mushrooms", "shroom", "shrooms", "mush", "mushies", "fungus", "fungi", "toadstool", "toadstools" ],
+    "correctUniqueWords": [ "gather", "pine", "conifer", "evergreen", "needles", "leaves" ],
+    "dangerUniqueWords": [ "gather", "mushroom", "mushrooms", "shroom", "shrooms", "mush", "mushies", "fungus", "fungi", "toadstool", "toadstools" ],
     "danger": "Game Over.",
     "correctChoice": "Correct Choice."
   },
@@ -14,8 +14,8 @@
     "message": "\n\nDecide on transportation.",
     "choices": [ "Take ferry", "Take passerby offer" ],
     "choiceContext": [ null, null ],
-    "correctUniqueWords": [ "ride", "horse", "passerby" ],
-    "dangerUniqueWords": [ "ferry", "river", "boat" ],
+    "correctUniqueWords": [ "ride", "horse", "passerby", "rider" ],
+    "dangerUniqueWords": [ "ferry", "river", "boat", "water", "taxi" ],
     "danger": "Game Over.",
     "correctChoice": "Correct Choice."
   }

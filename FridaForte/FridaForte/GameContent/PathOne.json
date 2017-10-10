@@ -2,11 +2,11 @@
 
   {
     "name": "Meadows Afternoon\n\n",
-    "message": "You must decide what plant to pick in order to make medicine to cure your cousin. You must make your decision quickly because you are running out of daylight.\n\nAvailable in the meadows (forest?) are pine needles and Echinacea.",
+    "message": "You must decide what plant to pick in order to make medicine to cure your cousin. You must make your decision quickly because you are running out of daylight.\n\nAvailable in the meadows are pine needles and Echinacea.",
     "choices": [ "Gather echinacea", "Gather pine needles" ],
     "choiceContext": [ null, null ],
-    "correctUniqueWords": [ "pine", "conifer", "evergreen", "needles", "leaves" ],
-    "dangerUniqueWords": [ "echinacea", "flowers", "weeds", "weed" ],
+    "correctUniqueWords": [ "gather", "pine", "conifer", "evergreen", "needles", "leaves" ],
+    "dangerUniqueWords": [ "gather", "echinacea", "flowers", "weeds", "weed" ],
     "danger": "As you reach down to pick the flower you are bitten by a venomous snake. The poison is quick. You die in minutes. Game Over.",
     "correctChoice": "You picked a hand full of pine needles and put them in your satchel. You see that it's starting to get dark, so you head to Asher's house."
   },
