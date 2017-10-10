@@ -30,11 +30,73 @@ namespace FridaForte
         //Start Game
         static void RunGame()
         {
-            Location[] locations = GetContent();
+            Location[] locations = GetContent("BasePath");
+            LocationIterator(locations);
+
+            locations = GetContent("Connector");
+
+            locations = GetPath(locations);
+            Clear();
+            LocationIterator(locations);
+
+            locations = GetContent("Ending");
+            LocationIterator(locations);
+            Clear();
+
+            ResetGame();
+        }
+
+        public static Location[] GetPath(Location[] locations)
+        {
+            BackgroundColor = ConsoleColor.DarkMagenta;
+            Typer("Location: " + locations[0].Name);
+            ResetColor();
+            Typer(WordWrapper(locations[0].Message));
+            locations[0].ShowChoices();
+            string input;
+            char[] seperatorChars = { ' ', ',' };
+            string[] words;
+            Location[] path = { };
+            bool isPath1;
+            bool isPath2;
+
+            do
+            {
+                input = GetInput("\nEnter your decision: ");
+                words = input.Split(seperatorChars);
+                isPath1 = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
+                isPath2 = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
+
+                if (isPath1 && !isPath2)
+                {
+                    path = GetContent("PathOne");
+                }
+                else if (isPath2 && !isPath1)
+                {
+                    path = GetContent("PathTwo");
+                }
+                else
+                {
+                    WriteLine("************************");
+                    ForegroundColor = ConsoleColor.Red;
+                    Typer($"You entered: {input}");
+                    ResetColor();
+                    Typer("I don't understand that command.");
+                    WriteLine("************************");
+                    Typer("Please try again.");
+                }
+
+            } while (!(isPath1 || isPath2) || (isPath1 && isPath2));
+
+            return path;
+            //canContinue = CanContinue(location, canContinue, gameWorld);
+        }
+
+        public static void LocationIterator(Location[] locations)
+        {
             Location location;
             bool canContinue = true;
-
-            GameWorld gameWorld = InitGameWorld(locations);
+            GameWorld gameWorld = InitGameWorld(GetContent("GameContent"));
 
             for (int i = 0; i < locations.Length && canContinue; ++i)
             {
@@ -45,8 +107,6 @@ namespace FridaForte
                 Typer(WordWrapper(location.Message));
                 canContinue = CanContinue(location, canContinue, gameWorld);
             }
-            ShowAuthors();
-            Typer("\n\nPress \"CTRL\" and \"C\" to close the window\n");
         }
 
         public static GameWorld InitGameWorld(Location[] locations)
@@ -86,29 +146,25 @@ namespace FridaForte
                 {
                     Typer(WordWrapper($"\n{location.Danger}"));
                     canContinue = false;
+                    ResetGame();
                 }
                 else if (isCorrectChoice && !isWrongChoice)
                 {
                     Typer(WordWrapper($"\n{location.CorrectChoice}"));
+                    Typer("\nPress any key to continue...");
                     canContinue = true;
                 }
                 else if (isCorrectChoice && isWrongChoice)
                 {
-                    WriteLine("Please be more specific");
+                    DisplayError(input, "Please be more specific");
                 }
                 else if (!isCorrectChoice && !isWrongChoice && (hasOtherLocationCorrectWord || hasOtherLocationDangerWord))
                 {
-                    WriteLine("That command doesn't apply here");
+                    DisplayError(input, "That command doesn't apply here");
                 }
                 else // user inputs neither danger choice nor correct choice,
                 {
-                    WriteLine("************************");
-                    ForegroundColor = ConsoleColor.Red;
-                    Typer($"You entered: {input}");
-                    ResetColor();
-                    Typer("I don't understand that command.");
-                    WriteLine("************************");
-                    Typer("Please try again.");
+                    DisplayError(input, "I don't understand that command.");
                 }
 
             } while (!(isWrongChoice || isCorrectChoice) || (isWrongChoice && isCorrectChoice));
@@ -117,6 +173,17 @@ namespace FridaForte
             Clear();
 
             return canContinue;
+        }
+
+        public static void DisplayError(string input, string error)
+        {
+            WriteLine("************************");
+            ForegroundColor = ConsoleColor.Red;
+            Typer($"You entered: {input}");
+            ResetColor();
+            Typer(error);
+            WriteLine("************************");
+            Typer("Please try again.");
         }
 
         public static bool IsFoundUniqueWords(IEnumerable<string> uniqueWords, string[] words)
@@ -131,11 +198,11 @@ namespace FridaForte
             return false;
         }
 
-        public static Location[] GetContent()
+        public static Location[] GetContent(string gameContent)
         {
             string path = Directory.GetCurrentDirectory();
 
-            string jsonFile = path + "../../../GameContent.json";
+            string jsonFile = $"{path}../../../GameContent/{gameContent}.json";
             Location[] locations = JsonConvert.DeserializeObject<Location[]>(File.ReadAllText(jsonFile));
 
             return locations;
@@ -149,6 +216,7 @@ namespace FridaForte
             Typer("************************************************");
             Typer("\nWelcome Player!");
             Typer($"\nYou are taking the role of {player.FirstName} {player.LastName} Pharmacist Extraordinaire!\n{player.FirstName} has had a modest and quiet life so far, but all of that is\nabout to change.");
+            Typer("\nPress any key to continue...");
             ReadKey();
             Clear();
         }
@@ -191,6 +259,24 @@ namespace FridaForte
                 }
             }
             return lines.ToString();
+        }
+
+        public static void ResetGame()
+        {
+            Typer("\nWould you like to play again, Yes or No: ");
+            string input = ReadLine().ToLower();
+            if (input == "yes" || input == "y")
+            {
+                Clear();
+                WelcomePlayer();
+                RunGame();
+            }
+            else if (input == "no" || input == "n")
+            {
+                Clear();
+                ShowAuthors();
+                Typer("\n\nPress \"CRTL\" and \"C\" to close the window\n");
+            }
         }
 
         //Typewriter effect
