@@ -1,22 +1,22 @@
 ﻿[
   {
     "name": "Forest\n\n",
-    "message": "\n\nYou are in the forest.",
+    "message": "\n\nYou are in the forest. The forest is a bountiful buffet of medicinal plants. You look around and narrow down your choices. Which should you choose?",
     "choices": [ "Pick mushrooms", "Gather pine needles" ],
     "choiceContext": [ null, null ],
-    "correctUniqueWords": [ "gather", "pine", "conifer", "evergreen", "needles", "leaves" ],
-    "dangerUniqueWords": [ "gather", "mushroom", "mushrooms", "shroom", "shrooms", "mush", "mushies", "fungus", "fungi", "toadstool", "toadstools" ],
-    "danger": "Game Over.",
-    "correctChoice": "Correct Choice."
+    "correctUniqueWords": [ "pine", "conifer", "evergreen", "needles", "leaves" ],
+    "dangerUniqueWords": [ "mushroom", "mushrooms", "shroom", "shrooms", "mush", "mushies", "fungus", "fungi", "toadstool", "toadstools" ],
+    "danger": "You decided to pick a handful of mushrooms, not realizing that they were poisonous. In fact, the poisin is so strong, your skin absorbs enough to kill you. Game Over.",
+    "correctChoice": "You strip a small tree of its pine needles. As the sun sets, you head toward Asher's house."
   },
   {
     "name": "By the river\n\n",
-    "message": "\n\nDecide on transportation.",
+    "message": "\"\\n\\nYou have started your journey back to Asher's house but the sun is setting. Once darkness falls, you will have a hard time finding your way back down the windy roads. You decide to take a quick break to look at your map, and figure out how much longer is your walk. You know you don't have much time, so you decide to find transportation. You see on your map, not far away, there is a river with a port where you can take a ferry. As you sit there planning your options, a cowboy on horsebck is passing by. The cowboy notices you and stops to ask if you need a ride back to town. Which would you like to do?",
     "choices": [ "Take ferry", "Take passerby offer" ],
     "choiceContext": [ null, null ],
-    "correctUniqueWords": [ "ride", "horse", "passerby", "rider" ],
-    "dangerUniqueWords": [ "ferry", "river", "boat", "water", "taxi" ],
-    "danger": "Game Over.",
-    "correctChoice": "Correct Choice."
+    "correctUniqueWords": [ "take", "ride", "horse", "passerby", "cowboy", "steed", "man", "person" ],
+    "dangerUniqueWords": [ "take", "ferry", "river", "boat", "raft", "logs", "port" ],
+    "danger": "A ferry ride in the dark is dangerous. Although the captain eagerly encourages your passage, the raft soon hits an obstacle in the dark, capsizing. \"If only I knew how to swim!\" you think as the water fills your lungs. Game Over.",
+    "correctChoice": "\"Can you hurry? My cousin is sick,\" you say to the cowboy. \"My horse is the fastest this town has ever seen,\" replies the cowboy proudly. You thank him as you race toward Asher's house."
   }
 ]
