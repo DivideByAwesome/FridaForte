@@ -308,6 +308,7 @@ namespace FridaForte
                 Thread.Sleep(speed);
                 if (KeyAvailable)
                 {
+                    ReadKey();
                     speed = 0;
                     Thread.Sleep(speed);
                 }
