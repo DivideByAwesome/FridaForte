@@ -6,7 +6,7 @@
     "choiceContext": [ null, null ],
     "correctUniqueWords": [ "gather", "pine", "conifer", "evergreen", "needles", "leaves" ],
     "dangerUniqueWords": [ "gather", "mushroom", "mushrooms", "shroom", "shrooms", "mush", "mushies", "fungus", "fungi", "toadstool", "toadstools" ],
-    "danger": "You decided to pick a handful of mushrooms, not realizing that they were poisonous. In fact, the poison is so strong, your skin absorbs enough to kill you. Game Over.",
+    "danger": "You decided to pick a handful of mushrooms, not realizing that they are poisonous. In fact, the poison is so strong, your skin absorbs enough to kill you. Game Over.",
     "correctChoice": "You strip a small tree of its pine needles. As the sun sets, you head toward Asher's house."
   },
   {
