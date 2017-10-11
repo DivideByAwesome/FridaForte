@@ -306,11 +306,11 @@ namespace FridaForte
             {
                 Write(str[i]);
                 Thread.Sleep(speed);
-                if (KeyAvailable)
-                {
-                    speed = 0;
-                    Thread.Sleep(speed);
-                }
+                //if (KeyAvailable)
+                //{
+                //    speed = 0;
+                //    Thread.Sleep(speed);
+                //}
             }
             WriteLine();
         }
