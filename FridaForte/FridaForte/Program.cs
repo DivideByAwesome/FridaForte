@@ -91,7 +91,7 @@ namespace FridaForte
                 {
                     path = GetContent("PathTwo");
                 }
-                else if (correctChoice == wrongChoice)
+                else if (correctChoice == wrongChoice && correctChoice > 0)
                 {
                     DisplayError(input, "Please be more specific");
                 }
@@ -104,7 +104,7 @@ namespace FridaForte
                     DisplayError(input, "I don't understand that command.");
                 }
 
-            } while (path1 < 1 &&  path2 < 1);
+            } while ((path1 < 1 && path2 < 1) || (correctChoice == wrongChoice && correctChoice > 0));
 
             return path;
             //canContinue = CanContinue(location, canContinue, gameWorld);
@@ -185,8 +185,8 @@ namespace FridaForte
                     DisplayError(input, "I don't understand that command.");
                 }
 
-            } while (wrongChoice < 1 && correctChoice < 1);
-
+            } while ((wrongChoice < 1 && correctChoice < 1) || (correctChoice == wrongChoice && correctChoice > 0));
+           
             ReadKey();
             Clear();
 
