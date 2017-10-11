@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameWorld.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -53,7 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="GameContent.json" />
+    <None Include="GameContent\BasePath.json" />
+    <None Include="GameContent\Connector.json" />
+    <None Include="GameContent\Ending.json" />
+    <None Include="GameContent\GameContent.json" />
+    <None Include="GameContent\PathOne.json" />
+    <None Include="GameContent\PathTwo.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

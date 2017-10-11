@@ -1,0 +1,36 @@
+﻿[
+
+  {
+    "name": "Meadows Afternoon\n\n",
+    "message": "You must decide what plant to pick in order to make medicine to cure your cousin. You must make your decision quickly because you are running out of daylight.\n\nAvailable in the meadows are pine needles and Echinacea.",
+    "choices": [ "Gather echinacea", "Gather pine needles" ],
+    "choiceContext": [ null, null ],
+    "correctUniqueWords": [ "gather", "pine", "conifer", "evergreen", "needles", "leaves" ],
+    "dangerUniqueWords": [ "gather", "echinacea", "flowers", "weeds", "weed" ],
+    "danger": "As you reach down to pick the flower you are bitten by a venomous snake. The poison is quick. You die in minutes. Game Over.",
+    "correctChoice": "You picked a hand full of pine needles and put them in your satchel. You see that it's starting to get dark, so you head to Asher's house."
+  },
+  {
+    "name": "Meadows Evening\n\n",
+    "message": "\n\nYou walk to the end of the meadow, and you stumble upon a road heading to town.",
+    "choices": [ "Continue walking", "Hitch a ride to town" ],
+    "choiceContext": [ null, null ],
+    "correctUniqueWords": [ "ride", "town", "hitch", "drive", "lift", "pick up", "carriage", "cab", "hitchhike", "thumb", "burn a ride" ],
+    "dangerUniqueWords": [ "walk", "stroll", "march", "gait", "ambulate", "saunter", "stride", "traipse", "tramp", "tread", "advance", "go on", "maintain", "forge ahead", "get on", "keep at", "keep on", "persist", "push on" ],
+    "danger": "You hear horse hooves but it is too dark to tell which direction they're coming from. CRASH! Tragically, you are run over by a stage coach speeding down the dark curvy road. Game Over.",
+    "correctChoice": "In order to save time, you chose to hitch a ride back to town on a stagecoach. Unbeknownst to you, the coach was highjacked by a wanted outlaw.  Upon arriving back in town, you were captured by the sheriff and immediately thrown in jail."
+  },
+  {
+    "name": "Fort Point Jailhouse\n\n",
+    "message": "\"Get on in there, lady!\" The deputy shouts as he slams the cell door.  \"The sheriff'll be back by in the mornin' to deal with ya.\" \"But, I'm innocent!\", you proclaim. \"Shut up and let me sleep!\" The dopey deputy takes a long stretch then sits back in his chair, puts his hat over his head and falls asleep. As the deputy sleeps, you weigh your options.",
+    "choices": [ "Wait for morning", "Pick lock" ],
+    "choiceContext": [
+      "You can wait until the morning to explain your story to the sheriff.",
+      "Use your hair pin to pick the lock, and escape the jail cell."
+    ],
+    "correctUniqueWords": [ "pick", "break", "open", "lock", "latch", "bolt", "bar", "padlock" ],
+    "dangerUniqueWords": [ "stay", "remain", "linger", "wait", "delay", "halt", "sit tight", "stick around", "morning", "dawn", "am", "a.m.", "daybreak", "sunrise" ],
+    "danger": "You choose to take the legal route and plead your case in the  morning, unfortunately, the sheriff doesn't believe you and forces you to stay a month in jail awaiting a trial, and in doing so, seals your cousins fate. Game Over.",
+    "correctChoice": "You choose to break the law (for real this time) and break out of jail. You grab your satchel from the sleeping deputy's desk and race to Asher's house."
+  }
+]

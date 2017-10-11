@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static System.Console;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace UnitTestProject1
 {
@@ -72,29 +73,24 @@ namespace UnitTestProject1
             Assert.IsInstanceOfType(actuals, typeof(Location[]));
         }
 
-        [TestMethod]
-        public void TestProgramCanContinue()
-        {
-            Location location = new Location(
-                "Pharmacy",
-                "Leaving the pharmacy....",
-                 new string[] { "Open the door!", "close door" },
-                 new string[] { "open", "close" },
-                 "correct",
-                 "dead",
-                 new string[] { "go", "help" },
-                 new string[] { "stay", "remain" });
+        // *** This method requires user input
+        // How do we test a method with user input?
+        //[TestMethod]
+        //public void TestProgramCanContinue()
+        //{
+        //    Location location = new Location(
+        //        "Pharmacy",
+        //        "Leaving the pharmacy....",
+        //         new string[] { "Open the door!", "close door" },
+        //         new string[] { "open", "close" },
+        //         "correct",
+        //         "dead",
+        //         new string[] { "go", "help" },
+        //         new string[] { "stay", "remain" });
 
-            string expected1 = "open";
-            bool isWrongChoice = expected1.Contains(location.Choices[0].ToLower());
-            string expected2 = "close";
-            bool isCorrectChoice = expected2.Contains(location.Choices[1].ToLower());
+        //    Assert.IsTrue(Program.CanContinue(location, true));
+        //}
 
-            Assert.AreEqual(expected1, location.Choices[0]);
-            Assert.AreEqual(expected2, location.Choices[1]);
-            Assert.IsTrue(isWrongChoice);
-            Assert.IsTrue(isCorrectChoice);
-        }
         [TestMethod]
         public void TestRunGame()
         {
@@ -134,6 +130,38 @@ namespace UnitTestProject1
 
             Assert.AreEqual(locations.Length - 1, index);
             Assert.AreEqual(false, canContinue);
+        }
+
+        [TestMethod]
+        public void TestInitGameWorld()
+        {
+            Location pharmacy = new Location(
+                "Pharmacy",
+                "Leaving the pharmacy....",
+                 new string[] { "Open the door!", "close door" },
+                 new string[] { "Open", "Close" },
+                 "correct",
+                 "dead",
+                 new string[] { "go", "help" },
+                 new string[] { "stay", "remain" });
+            Location meadow = new Location(
+               "Meadow",
+               "Leaving the meadow....",
+               new string[] { "Open the door!" },
+               new string[] { "leave", "stay" },
+               "correct",
+               "dead",
+               new string[] { "go", "help" },
+               new string[] { "stay", "remain" });
+            Location[] locations = { pharmacy, meadow };
+            GameWorld gameWorld = Program.InitGameWorld(locations);
+
+            Assert.IsInstanceOfType(gameWorld.AllCorrectUniqueWords, typeof(HashSet<string>));
+            Assert.IsTrue(gameWorld.AllCorrectUniqueWords.Contains("go"));
+            Assert.IsTrue(gameWorld.AllCorrectUniqueWords.Contains("help"));
+            Assert.IsInstanceOfType(gameWorld.AllDangerUniqueWords, typeof(HashSet<string>));
+            Assert.IsTrue(gameWorld.AllDangerUniqueWords.Contains("stay"));
+            Assert.IsTrue(gameWorld.AllDangerUniqueWords.Contains("remain"));
         }
     } // End class UnitTest1
 }

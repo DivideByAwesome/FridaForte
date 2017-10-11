@@ -1,0 +1,15 @@
+﻿[
+  {
+    "name": "Asher's House\n\n",
+    "message": "You arrive at Asher's house. \"Dear Asher!\" you exclaim upon seeing the frail figure in bed. Time is running out for Asher. Decide quickly how to prepare his medicine!",
+    "choices": [ "Crush needles", "Make tea" ],
+    "choiceContext": [
+      "You can crush the pine needles to a powder and apply directly to Asher's chest",
+      "You can boil the pine needles and make a tea for Asher to drink."
+    ],
+    "correctUniqueWords": [ "make", "prepare", "compound", "boil", "steam", "cook", "generate", "manufacture", "produce", "cook up", "tea", "drink", "brew" ],
+    "dangerUniqueWords": [ "crush", "smash", "pulverize", "powder", "compress", "press", "squash", "needles" ],
+    "danger": "After waiting for a day, you realize that the powder is not effective. Asher suddenly develops a skin rash and the other symptoms worsen. Sadly, Asher dies. You have failed to save your cousin. Game Over.",
+    "correctChoice": "You continue to monitor Asher for the next few days on this treatment. After a month he has fully recovered! The locals have heard of your pharmaceutical genius and they beg you to stay as the town doctor.\n\n*******************************\n\nCongratulations! You've won!!\n\n*******************************"
+  }
+] 
