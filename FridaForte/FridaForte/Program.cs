@@ -276,8 +276,8 @@ namespace FridaForte
 
         public static void ResetGame()
         {
-            Typer(Validator.ValidateString("\nWould you like to play again, Yes or No: "));
-            string input = ReadLine().ToLower();
+            string input = Validator.ValidateString("\nWould you like to play again, Yes or No: ").ToLower();
+
             if (input == "yes" || input == "y")
             {
                 Clear();
@@ -289,6 +289,10 @@ namespace FridaForte
                 Clear();
                 ShowAuthors();
                 Typer("\n\nPress \"CRTL\" and \"C\" to close the window\n");
+            }
+            else // if the user enters neither yes nor no
+            {
+                ResetGame();
             }
         }
 
