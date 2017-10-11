@@ -32,7 +32,7 @@ namespace FridaForte
 
         public void ShowChoices()
         {
-            Program.Typer("\nWhat do you want to do?\n");
+            WriteLine("\nWhat do you want to do?\n");
             ForegroundColor = ConsoleColor.Gray;
             BackgroundColor = ConsoleColor.DarkGreen;
             WriteLine(Choices[0]);
