@@ -74,14 +74,14 @@ namespace FridaForte
                 input = GetInput("\nEnter your decision: ");
                 words = input.Split(seperatorChars);
 
-                otherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
-                otherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
+                otherLocationCorrectWord = FoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
+                otherLocationDangerWord = FoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
 
-                correctChoice = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
-                wrongChoice = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
+                correctChoice = FoundUniqueWords(locations[0].CorrectUniqueWords, words);
+                wrongChoice = FoundUniqueWords(locations[0].DangerUniqueWords, words);
 
-                path1 = IsFoundUniqueWords(locations[0].CorrectUniqueWords, words);
-                path2 = IsFoundUniqueWords(locations[0].DangerUniqueWords, words);
+                path1 = FoundUniqueWords(locations[0].CorrectUniqueWords, words);
+                path2 = FoundUniqueWords(locations[0].DangerUniqueWords, words);
 
                 if (path1 > path2)
                 {
@@ -155,10 +155,10 @@ namespace FridaForte
                 char[] seperatorChars = { ' ', ',' };
                 string[] words = input.Split(seperatorChars);
 
-                correctChoice = IsFoundUniqueWords(location.CorrectUniqueWords, words);
-                wrongChoice = IsFoundUniqueWords(location.DangerUniqueWords, words);
-                otherLocationCorrectWord = IsFoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
-                otherLocationDangerWord = IsFoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
+                correctChoice = FoundUniqueWords(location.CorrectUniqueWords, words);
+                wrongChoice = FoundUniqueWords(location.DangerUniqueWords, words);
+                otherLocationCorrectWord = FoundUniqueWords(gameWorld.AllCorrectUniqueWords, words);
+                otherLocationDangerWord = FoundUniqueWords(gameWorld.AllDangerUniqueWords, words);
 
                 if (wrongChoice > correctChoice)
                 {
@@ -204,7 +204,7 @@ namespace FridaForte
             Typer("Please try again.");
         }
 
-        public static int IsFoundUniqueWords(IEnumerable<string> uniqueWords, string[] words)
+        public static int FoundUniqueWords(IEnumerable<string> uniqueWords, string[] words)
         {
             int counter = 0;
             for (int i = 0; i < words.Length; ++i)
