@@ -29,7 +29,7 @@ namespace FridaForte
                 {
                     input = string.Empty;
                 }
-            } while (input.Length < 2 || input.Length > 50);
+            } while (input.Length < 1 || input.Length > 50);
 
             return input;
         }
