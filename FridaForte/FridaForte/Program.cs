@@ -276,7 +276,7 @@ namespace FridaForte
 
         public static void ResetGame()
         {
-            Typer("\nWould you like to play again, Yes or No: ");
+            Typer(Validator.ValidateString("\nWould you like to play again, Yes or No: "));
             string input = ReadLine().ToLower();
             if (input == "yes" || input == "y")
             {
